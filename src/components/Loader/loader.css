@@ -1,67 +1,52 @@
-
-
-.fill{
-    animation: fill_color 3s ease-out;
+.fill {
+  animation: fill_color 3s ease-out;
 }
 
 @keyframes fill_color {
-	0%   {
-		transform: translateX(-100%);
-        /* stroke-width: 2; */
-	}
-	/* 70%  {fill: rgba(72,138,20,0); stroke: #000000; }
+  0% {
+    transform: translateX(-100%);
+    /* stroke-width: 2; */
+  }
+  /* 70%  {fill: rgba(72,138,20,0); stroke: #000000; }
 	80%  {fill: rgba(72,138,20,0); stroke: #000000; stroke-width: 3; } */
-	100% {
-		transform: translateX(0);
-	}
+  100% {
+    transform: translateX(0);
+  }
 }
 
 .fade-out-move-down {
-	/* opacity: 0; */
-	transform: translateY(20px);
-  }
-  
-  .fade-in-move-down {
-	opacity: 1;
-	transform: translateY(20px);
-  }
-  
-  .transition-all {
-	transition: opacity 1s ease, transform 1s ease;
-  }
-  
-  /* .opacity-0 {
-	opacity: 0;
-  } */
-  
-  .translate-y-[-20px] {
-	transform: translateY(-20px);
-  }
-  
+  /* opacity: 0; */
+  transform: translateY(20px);
+}
 
-  .typewriter {
-	display: inline-block;
-	white-space: nowrap; /* Prevent text from wrapping */
-	overflow: hidden; /* Hide text that goes outside the container */
-	border-right: 2px solid white; /* Cursor effect */
-	animation: typing 3s steps(30, end), blink 0.5s step-end infinite;
+.fade-in-move-down {
+  /* opacity: 1; */
+  transform: translateY(20px);
+}
+
+
+.typewriter {
+  display: inline-block;
+  white-space: nowrap; /* Prevent text from wrapping */
+  overflow: hidden; /* Hide text that goes outside the container */
+  border-right: 2px solid white; /* Cursor effect */
+  animation: typing 3s steps(30, end), blink 0.5s step-end infinite;
+}
+
+@keyframes typing {
+  from {
+    width: 0; /* Start with no text */
   }
-  
-  @keyframes typing {
-	from {
-	  width: 0; /* Start with no text */
-	}
-	to {
-	  width: 100%; /* Full text revealed */
-	}
+  to {
+    width: 100%; /* Full text revealed */
   }
-  
-  @keyframes blink {
-	from {
-	  border-right-color: transparent;
-	}
-	to {
-	  border-right-color: white;
-	}
+}
+
+@keyframes blink {
+  from {
+    border-right-color: transparent;
   }
-  
+  to {
+    border-right-color: white;
+  }
+}
