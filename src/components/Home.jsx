@@ -20,7 +20,7 @@ const Home = () => {
   return (
     <>
       <div>
-        <div data-aos="fade-down" data-aos-duration="2000">
+        <div data-aos="fade-down" data-aos-duration="1500">
           <Header />
         </div>
         <Sidebar
