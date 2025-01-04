@@ -4,26 +4,26 @@ import { Link } from "react-router-dom";
 import Header from "./Header";
 import "../styles/execom.css";
 
-import Shameem from "../assets/images/Sir.jpg";
-import Sangeeth from "../assets/images/Sangeeth.jpg";
-import Sona from "../assets/images/Sona.jpg";
+import Shameem from "../assets/images/Sir.png";
+import Sangeeth from "../assets/images/Sangeeth.png";
+import Sona from "../assets/images/Sona.png";
 import Amit from "../assets/images/Amit.png";
-import Aron from "../assets/images/Aron.jpg";
-import Rohit from "../assets/images/Rohit.jpg";
-import Afeef from "../assets/images/Afeef1.png";
-import Sreeresh from "../assets/images/Sreeresh1.png";
-import Mizhab from "../assets/images/Mizhab.jpg";
-import Vishnu from "../assets/images/Vishnu.jpg";
-import Hridya from "../assets/images/Hridya.jpg";
-// import Akshay from "../assets/images/Akshay.jpg";
-import Shikha from "../assets/images/Shikha.jpg";
-import Alan from "../assets/images/Alan.jpg";
-import Jobin from "../assets/images/Jobin.jpg";
-import Swarag from "../assets/images/Swarag.jpg";
-import Johan from "../assets/images/Johan.jpg";
-import Aditya from "../assets/images/Aditya.jpg";
-import Liya from "../assets/images/Liya.jpg";
-import Fathima from "../assets/images/Fathima.jpg";
+import Aron from "../assets/images/Aron.png";
+import Rohit from "../assets/images/Rohit.png";
+import Afeef from "../assets/images/Afeef.png";
+import Sreeresh from "../assets/images/Sreeresh.png";
+import Mizhab from "../assets/images/Mizhab.png";
+import Vishnu from "../assets/images/Vishnu.png";
+import Hridya from "../assets/images/Hridya.png";
+import Akshay from "../assets/images/Akshay.png";
+import Shikha from "../assets/images/Shikha.png";
+import Alan from "../assets/images/Alan.png";
+import Jobin from "../assets/images/Jobin.png";
+import Swarag from "../assets/images/Swarag.png";
+import Johan from "../assets/images/Johan.png";
+import Aditya from "../assets/images/Aditya.png";
+import Liya from "../assets/images/Liya.png";
+import Fathima from "../assets/images/Fathima.png";
 
 const Execom = () => {
   const [visible, setVisible] = useState(false);
@@ -114,7 +114,7 @@ const Execom = () => {
         },
         {
           name: "Akshay",
-          image: Amit,
+          image: Akshay,
         },
       ],
     },
@@ -194,7 +194,7 @@ const Execom = () => {
                 className="execom-card-image w-32 object-cover shadow-md"
               />
             }
-            <span>{member.name != "Sreeresh" ? member.name : ""}</span>
+            <span>{member.name}</span>
           </div>
         ))}
       </div>
