@@ -5,7 +5,7 @@ const Footer = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col sm:flex-row sm:justify-center items-center min-[840px]:gap-28 px-7 relative pb-24">
+    <div className="flex flex-col sm:flex-row sm:justify-center items-center min-[840px]:gap-28 px-7 relative p-24">
       <img
         src="/logo.png"
         className="w-96 cursor-pointer"
