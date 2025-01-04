@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Shameem from '../assets/images/Sir.jpg';
+// import Shameem from '../assets/images/Sir.jpg';
 import { Sidebar } from "primereact/sidebar";
 import { Link } from "react-router-dom";
 import Header from "./Header";
