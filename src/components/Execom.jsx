@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Header from "./Header";
 import "../styles/execom.css";
 
-import Shameem from "../assets/images/Sir.png";
+import Shameem from "../assets/images/Shameem.png";
 import Sangeeth from "../assets/images/Sangeeth.png";
 import Sona from "../assets/images/Sona.png";
 import Amit from "../assets/images/Amit.png";
@@ -15,7 +15,8 @@ import Sreeresh from "../assets/images/Sreeresh.png";
 import Mizhab from "../assets/images/Mizhab.png";
 import Vishnu from "../assets/images/Vishnu.png";
 import Hridya from "../assets/images/Hridya.png";
-import Akshay from "../assets/images/Akshay.png";
+import Angelina from "../assets/images/Angelina.png";
+import Jeff from "../assets/images/Jeff.png";
 import Shikha from "../assets/images/Shikha.png";
 import Alan from "../assets/images/Alan.png";
 import Jobin from "../assets/images/Jobin.png";
@@ -110,11 +111,16 @@ const Execom = () => {
       members: [
         {
           name: "Hridya",
+          position: "Head",
           image: Hridya,
         },
         {
-          name: "Akshay",
-          image: Akshay,
+          name: "Angelina",
+          image: Angelina,
+        },
+        {
+          name: "Jeff",
+          image: Jeff,
         },
       ],
     },
@@ -157,6 +163,7 @@ const Execom = () => {
       members: [
         {
           name: "Liya",
+          position: "Head",
           image: Liya,
         },
         {
@@ -187,14 +194,19 @@ const Execom = () => {
             className="flex flex-col items-center justify-between gap-2 transition-transform duration-300 transform hover:scale-105"
             key={index}
           >
-            {
+            <span className="text-xs text-center">
+              {member.position || " "}
+            </span>
+
+            <div className="flex flex-col items-center gap-2 justift-between">
               <img
                 src={member.image}
                 alt={member.name}
                 className="execom-card-image w-32 object-cover shadow-md"
               />
-            }
-            <span>{member.name}</span>
+
+              <span>{member.name} </span>
+            </div>
           </div>
         ))}
       </div>
