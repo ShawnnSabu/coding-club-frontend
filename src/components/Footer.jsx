@@ -1,4 +1,3 @@
-import Logo from "../assets/coding club dp copy 2.svg";
 import { Link, useNavigate } from "react-router-dom";
 
 const Footer = () => {

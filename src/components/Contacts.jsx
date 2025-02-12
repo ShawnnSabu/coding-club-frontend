@@ -1,39 +1,14 @@
-import { Sidebar } from "primereact/sidebar";
-import { Link } from "react-router-dom";
+
 import Header from "./Header";
-import { useState } from "react";
 import "../styles/contacts.css";
 
 const Contacts = () => {
-
-    const [visible, setVisible] = useState(false);
-
     
     return ( 
 
         <>
                 <div>
                     <Header />
-                    <Sidebar
-                        visible={visible}
-                        position="right"
-                        onHide={() => setVisible(false)}
-                    >
-                        <div className="flex flex-col gap-7 items-center">
-                            <Link to="/" onClick={() => setVisible(false)}>
-                                Home
-                            </Link>
-                            <Link to="/events" onClick={() => setVisible(false)}>
-                                Events
-                            </Link>
-                            <Link to="/execom" onClick={() => setVisible(false)}>
-                                Execom
-                            </Link>
-                            <Link to="/contacts" onClick={() => setVisible(false)}>
-                                Contact
-                            </Link>
-                        </div>
-                    </Sidebar>
                 </div>
 
                 <div className='bg-black px-7 pb-7 '>

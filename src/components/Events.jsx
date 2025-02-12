@@ -1,12 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Sidebar } from "primereact/sidebar";
-import { Link } from "react-router-dom";
 import Header from "./Header";
 import { Dialog } from "primereact/dialog";
 
 const Events = () => {
-    const [visible, setVisible] = useState(false);
     const [events, setEvents] = useState([]);
     const [dialogVisible, setDialogVisible] = useState(false);
     const [formData, setFormData] = useState({
@@ -74,18 +71,6 @@ const Events = () => {
         <>
             <div>
                 <Header />
-                <Sidebar
-                    visible={visible}
-                    position="right"
-                    onHide={() => setVisible(false)}
-                >
-                    <div className="flex flex-col gap-7 items-center">
-                        <Link to="/" onClick={() => setVisible(false)}>Home</Link>
-                        <Link to="/events" onClick={() => setVisible(false)}>Events</Link>
-                        <Link to="/execom" onClick={() => setVisible(false)}>Execom</Link>
-                        <Link to="/contacts" onClick={() => setVisible(false)}>Contact</Link>
-                    </div>
-                </Sidebar>
             </div>
             <div className="flex-auto p-7 mb-7 sm:mb-20 sm:px-14">
                 <div className="flex sm:mt-7 mb-24">

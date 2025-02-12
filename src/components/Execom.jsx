@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { Sidebar } from "primereact/sidebar";
-import { Link } from "react-router-dom";
 import Header from "./Header";
 import "../styles/execom.css";
 
@@ -27,8 +25,6 @@ import Liya from "../assets/images/Liya.png";
 import Fathima from "../assets/images/Fathima.png";
 
 const Execom = () => {
-  const [visible, setVisible] = useState(false);
-
   const [execomList, setExecomList] = useState([
     {
       title: "Faculty Incharge",
@@ -217,26 +213,6 @@ const Execom = () => {
     <>
       <div>
         <Header />
-        <Sidebar
-          visible={visible}
-          position="right"
-          onHide={() => setVisible(false)}
-        >
-          <div className="flex flex-col gap-7 items-center">
-            <Link to="/" onClick={() => setVisible(false)}>
-              Home
-            </Link>
-            <Link to="/events" onClick={() => setVisible(false)}>
-              Events
-            </Link>
-            <Link to="/execom" onClick={() => setVisible(false)}>
-              Execom
-            </Link>
-            <Link to="/contacts" onClick={() => setVisible(false)}>
-              Contact
-            </Link>
-          </div>
-        </Sidebar>
       </div>
 
       <div className="flex flex-col gap-20 p-3 sm:px-14">
