@@ -1,16 +1,12 @@
-import Logo from "../assets/coding club dp copy 2.svg";
 import "../styles/home.css";
 import AboutUsPic from "../assets/Code typing-bro (1) 1.svg";
 import VisionPic from "../assets/To the stars-rafiki (1).svg";
 import AboutUsPic2 from "../assets/Code typing-bro.svg";
 import VisionPic2 from "../assets/To the stars-rafiki(2).svg";
 import { useEffect, useState } from "react";
-import { Sidebar } from "primereact/sidebar";
-import { Link } from "react-router-dom";
 import Header from "./Header";
 
 const Home = () => {
-  const [visible, setVisible] = useState(false);
   const [showLogo, setShowLogo] = useState(false);
 
   useEffect(() => {
@@ -23,26 +19,6 @@ const Home = () => {
         <div data-aos="fade-down" data-aos-duration="1500">
           <Header />
         </div>
-        <Sidebar
-          visible={visible}
-          position="right"
-          onHide={() => setVisible(false)}
-        >
-          <div className="flex flex-col gap-7 items-center">
-            <Link to="/" onClick={() => setVisible(false)}>
-              Home
-            </Link>
-            <Link to="/events" onClick={() => setVisible(false)}>
-              Events
-            </Link>
-            <Link to="/execom" onClick={() => setVisible(false)}>
-              Execom
-            </Link>
-            <Link to="/contacts" onClick={() => setVisible(false)}>
-              Contact
-            </Link>
-          </div>
-        </Sidebar>
       </div>
 
       <div className="flex-auto overflow-hidden h-full">
