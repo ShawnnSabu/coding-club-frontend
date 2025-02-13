@@ -19,21 +19,8 @@ const AdminHeader = ({ setVisible }) => {
         <Link to="/admin-events" className="hover:underline underline-offset-4">
           Events
         </Link>
-
-        <Link to="/admin-events" className="hover:underline underline-offset-4">
-          NewsLetter
-        </Link>
-
-        <Link to="/execom" className="hover:underline underline-offset-4">
-          Execom
-        </Link>
-        
-        <Link to="/contacts" className="hover:underline underline-offset-4">
-          Contact
-        </Link>
-
         <Link to="/" className="hover:underline underline-offset-4">
-          Home
+          Admin-out
         </Link>
 
 
