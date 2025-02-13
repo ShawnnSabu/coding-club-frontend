@@ -25,7 +25,8 @@ const AdminEvents = () => {
     const [eventImage, setEventImage] = useState(""); 
     const [eventMode, setEventMode] = useState(""); 
     const [events, setEvents] = useState([]); 
-    const [registrations, setRegistrations] = useState([]); 
+    const [pastEvents, setPastEvents] = useState([]);  
+        const [registrations, setRegistrations] = useState([]); 
     const [selectedEvent, setSelectedEvent] = useState(null); 
 
 
@@ -41,7 +42,19 @@ const AdminEvents = () => {
             }
         };
 
+        const fetchPastEvents = async () => {
+            try {
+                const response = await axios.get(`${import.meta.env.VITE_API_URL}/events`);
+                const currentDate = new Date();
+                const pastEvents = response.data.filter(event => new Date(event.eventDate) < currentDate);
+                setPastEvents(pastEvents);
+            } catch (error) {
+                console.error("Error fetching past events", error);
+            }
+        };
+    
         fetchEvents();
+        fetchPastEvents();
     }, []); 
     const handleAddEvent = async () => {
         const formData = new FormData();
@@ -333,6 +346,47 @@ const AdminEvents = () => {
                         <p>No upcoming events currently</p>
                     )}
                 </div>
+
+                <div className="flex sm:mt-7 mb-24 mt-16">
+                <div className="font-black text-2xl sm:text-4xl">PAST EVENTS</div>
+                <div className="flex-auto border-b-4 mb-2 ml-2"></div>
+                
+            </div>
+
+            <div className="flex flex-wrap justify-center gap-4">
+                {pastEvents.length > 0 ? (
+                    pastEvents.map(event => (
+                        <div key={event._id} className="event-card mb-6 p-5 w-80 border rounded-lg shadow-lg transition-transform duration-200 hover:scale-105 bg-gradient-to-b from-gray-900 to-gray-700 text-white text-center">
+                            {event.eventImage && (
+                                <img 
+                                    src={`data:image/png;base64,${event.eventImage}`} 
+                                    alt={event.eventName} 
+                                    className="w-100 h-120 object-contain rounded-t-lg mb-4"
+                                />
+                            )}
+                            <h3 className="text-xl font-semibold mb-2 uppercase underline">{event.eventName}</h3>
+                            <p className="mb-2 font-normal text-gray-400">{event.eventDescription}</p>
+                            <p className="text-gray-200">
+                                <strong>Date: </strong> 
+                                <span className="text-red-500">
+                                    {new Date(event.eventDate).toLocaleString("en-US", {
+                                        year: "numeric",
+                                        month: "long",
+                                        day: "numeric",
+                                        hour: "2-digit",
+                                        minute: "2-digit",
+                                        hour12: true
+                                    })}
+                                </span>
+                            </p>
+                            <p className="text-gray-200"><strong>Venue:</strong> {event.eventVenue}</p>
+                            <p className="text-gray-200"><strong>Mode:</strong> {event.eventMode}</p>
+                        </div>
+                    ))
+                ) : (
+                    <p>No past events available</p>
+                )}
+            </div>
 
                
 
