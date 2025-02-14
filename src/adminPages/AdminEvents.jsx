@@ -133,10 +133,10 @@ const AdminEvents = () => {
     setIsRegModal(true);
   };
 
-//   const closeRegistrationDialog = () => {
-//     setIsRegModal(false);
-//     setRegistrations([]);
-//   };
+  //   const closeRegistrationDialog = () => {
+  //     setIsRegModal(false);
+  //     setRegistrations([]);
+  //   };
 
   const downloadExcel = (data) => {
     const worksheet = XLSX.utils?.json_to_sheet(data);
@@ -177,15 +177,18 @@ const AdminEvents = () => {
               events.map((event) => (
                 <div
                   key={event._id}
-                  className="event-card  p-5 w-80 border rounded-lg shadow-lg transition-transform duration-200 hover:scale-[1.01] bg-gradient-to-b from-gray-700 to-black text-white text-center"
+                  className="event-card w-full sm:w-80 overflow-hidden  p-5 border rounded-lg shadow-lg transition-transform duration-200 hover:scale-[1.01] bg-gradient-to-b from-gray-700 to-black text-white text-center"
                 >
-                  {event.eventImage && (
+                  <div className="w-full h-60 overflow-hidden mb-4 rounded-lg">
                     <img
-                      src={`data:image/png;base64,${event.eventImage}`}
+                      src={
+                        `data:image/png;base64,${event.eventImage}` ||
+                        "ccLogo.svg"
+                      }
                       alt={event.eventName}
-                      className="w-100 h-120 object-contain rounded-t-lg mb-4"
+                      className="w-full object-cover overflow-hidden  rounded-t-lg mb-4"
                     />
-                  )}
+                  </div>
                   <h3 className="text-xl font-semibold mb-2 uppercase underline">
                     {event.eventName}
                   </h3>
@@ -236,13 +239,14 @@ const AdminEvents = () => {
                   key={event._id}
                   className="event-card  p-5 w-80 border rounded-lg shadow-lg transition-transform duration-200 hover:scale-105 bg-gradient-to-b from-gray-900 to-gray-700 text-white text-center"
                 >
-                  {event.eventImage && (
-                    <img
-                      src={`data:image/png;base64,${event.eventImage}`}
-                      alt={event.eventName}
-                      className="w-100 h-120 object-contain rounded-t-lg mb-4"
-                    />
-                  )}
+                  <img
+                    src={
+                      `data:image/png;base64,${event.eventImage}` ||
+                      "ccLogo.svg"
+                    }
+                    alt={event.eventName}
+                    className="h-60 w-full object-contain rounded-lg mb-4"
+                  />
                   <h3 className="text-xl font-semibold mb-2 uppercase underline">
                     {event.eventName}
                   </h3>
