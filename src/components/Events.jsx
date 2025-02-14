@@ -167,7 +167,7 @@ const Events = () => {
                             </div>
                         ))
                     ) : (
-                        <p>No events available</p>
+                        <p>Loading all the Events. Please Wait!</p>
                     )}
                 </div>
             </div>
