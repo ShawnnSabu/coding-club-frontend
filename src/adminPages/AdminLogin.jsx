@@ -1,8 +1,6 @@
 // AdminLogin.jsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Sidebar } from "primereact/sidebar";
-import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import {Dialog} from "primereact/dialog"
 import {Button} from "primereact/button"
@@ -10,7 +8,6 @@ import {Button} from "primereact/button"
 const AdminLogin = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [visible, setVisible] = useState(false);
   const [dialogVisible, setDialogVisible] = useState(false);
 
   const [errorMessage, setErrorMessage] = useState("");
@@ -41,15 +38,6 @@ const AdminLogin = () => {
   return (
     <>
       <Header />
-      <Sidebar visible={visible} position="right" onHide={() => setVisible(false)}>
-        <div className="flex flex-col gap-7 items-center">
-          <Link to="/" onClick={() => setVisible(false)}>Home</Link>
-          <Link to="/events" onClick={() => setVisible(false)}>Events</Link>
-          <Link to="/execom" onClick={() => setVisible(false)}>Execom</Link>
-          <Link to="/contacts" onClick={() => setVisible(false)}>Contact</Link>
-        </div>
-      </Sidebar>
-
       <Dialog
         header="Error"
         visible={dialogVisible}

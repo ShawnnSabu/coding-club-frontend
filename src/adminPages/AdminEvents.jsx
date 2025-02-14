@@ -1,20 +1,16 @@
 import { useState, useEffect } from "react";
-import { Sidebar } from "primereact/sidebar";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
 import { Calendar } from "primereact/calendar";
 import { InputTextarea } from "primereact/inputtextarea";
 import { FileUpload } from "primereact/fileupload";
 import { Dropdown } from "primereact/dropdown";
-import { Link } from "react-router-dom";
 import AdminHeader from "./AdminHeader";
 import axios from 'axios';
-import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
 import "../styles/home.css";
 
 const AdminEvents = () => {
-    const [visible, setVisible] = useState(false);
     const [dialogVisible, setDialogVisible] = useState(false);
     const [registrationDialogVisible, setRegistrationDialogVisible] = useState(false); 
 
@@ -143,18 +139,6 @@ const AdminEvents = () => {
     return (
         <div className="admin-dashboard-container">
             <AdminHeader />
-            <Sidebar
-                visible={visible}
-                position="right"
-                onHide={() => setVisible(false)}
-            >
-                <div className="flex flex-col gap-7 items-center">
-                    <Link to="/" onClick={() => setVisible(false)}>Home</Link>
-                    <Link to="/events" onClick={() => setVisible(false)}>Events</Link>
-                    <Link to="/execom" onClick={() => setVisible(false)}>Execom</Link>
-                    <Link to="/contacts" onClick={() => setVisible(false)}>Contact</Link>
-                </div>
-            </Sidebar>
 
             <div className="flex-auto p-7 mb-7 sm:mb-20 sm:px-14">
                 <div className="flex sm:mt-7 mb-24">
