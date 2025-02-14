@@ -1,6 +1,4 @@
-import { Dialog } from "primereact/dialog";
 import PropTypes from "prop-types";
-import React from "react";
 import { IoClose } from "react-icons/io5";
 
 EventModal.propTypes = {

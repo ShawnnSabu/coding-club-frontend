@@ -133,10 +133,10 @@ const AdminEvents = () => {
     setIsRegModal(true);
   };
 
-  const closeRegistrationDialog = () => {
-    setIsRegModal(false);
-    setRegistrations([]);
-  };
+//   const closeRegistrationDialog = () => {
+//     setIsRegModal(false);
+//     setRegistrations([]);
+//   };
 
   const downloadExcel = (data) => {
     const worksheet = XLSX.utils?.json_to_sheet(data);
