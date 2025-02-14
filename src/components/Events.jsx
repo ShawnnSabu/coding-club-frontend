@@ -7,6 +7,9 @@ const Events = () => {
     const [events, setEvents] = useState([]);
     const [allEvents, setAllEvents] = useState([]);
     const [dialogVisible, setDialogVisible] = useState(false);
+    const [successDialogVisible, setSuccessDialogVisible] = useState(false);
+    const [errorDialogVisible, setErrorDialogVisible] = useState(false);
+
     const [formData, setFormData] = useState({
         name: '',
         branch: '',
@@ -74,8 +77,10 @@ const Events = () => {
                 eventTitle: '',
                 eventDate: ''   
             }); 
+            setSuccessDialogVisible(true);
         } catch (error) {
             console.error("Error registering for event:", error);
+            setErrorDialogVisible(true);
         }
     };
 
@@ -183,19 +188,71 @@ const Events = () => {
                             <label className="mb-1">Branch:</label>
                             <select name="branch" value={formData.branch} onChange={handleInputChange} className="mb-3 p-2 border border-gray-300 rounded" required>
                                 <option value="">Select your branch</option>
+                                <option value="ARCH">ARCH</option>
+                                <option value="CHEM">CHEM</option>
+                                <option value="CIVIL">CIVIL</option>
+                                <option value="CSE-AI">CSE-AI</option>
                                 <option value="CSE">CSE</option>
                                 <option value="ECE">ECE</option>
+                                <option value="EEE">EEE</option>
+                                <option value="ER">ER</option>
+                                <option value="MECH">MECH</option>
                             </select>
 
                             <label className="mb-1">Year:</label>
-                            <input type="text" name="year" value={formData.year} onChange={handleInputChange} className="mb-3 p-2 border border-gray-300 rounded" required />
+                            <select name="year" value={formData.year} onChange={handleInputChange} className="mb-3 p-2 border border-gray-300 rounded" required>
+                                <option value="">Select your year</option>
+                                <option value="First">First</option>
+                                <option value="Second">Second</option>
+                                <option value="Third">Third</option>
+                                <option value="Fourth">Fourth</option>
+                            </select>
 
-                            <button type="submit" className="mt-4 w-32 bg-gradient-to-r from-red-500 to-blue-500 text-white font-semibold py-2 px-4 rounded hover:scale-105 transition-transform duration-200 transform translate-x-2">
+                            <label className="mb-1">Email ID:</label>
+                            <input type="email" name="emailId" value={formData.emailId} onChange={handleInputChange} className="mb-3 p-2 border border-gray-300 rounded" required />
+
+                            <label className="mb-1">Mobile No:</label>
+                            <input type="text" name="mobileNo" value={formData.mobileNo} onChange={handleInputChange} className="mb-3 p-2 border border-gray-300 rounded" required />
+
+                            <button
+                                type="submit"
+                                className="mt-4 w-32 bg-gradient-to-r from-red-500 to-blue-500 text-white font-semibold py-2 px-4 rounded hover:scale-105 transition-transform duration-200 transform translate-x-2"
+                            >
                                 Register
                             </button>
                         </div>
                     </form>
                 </div>
+            </Dialog>
+            
+            <Dialog
+                header="Registration Successful"
+                visible={successDialogVisible}
+                style={{ width: '30vw' }}
+                onHide={() => setSuccessDialogVisible(false)}
+            >
+                <p>Your registration was successful!</p>
+                <button
+                    onClick={() => setSuccessDialogVisible(false)}
+                    className="mt-4 w-32 bg-gradient-to-r from-green-500 to-blue-500 text-white font-semibold py-2 px-4 rounded hover:scale-105 transition-transform duration-200 transform translate-x-2"
+                >
+                    Close
+                </button>
+            </Dialog>
+
+            <Dialog
+                header="Registration Failed"
+                visible={errorDialogVisible}
+                style={{ width: '30vw' }}
+                onHide={() => setErrorDialogVisible(false)}
+            >
+                <p>Sorry, there was an error registering for the event. Please try again later.</p>
+                <button
+                    onClick={() => setErrorDialogVisible(false)}
+                    className="mt-4 w-32 bg-gradient-to-r from-red-500 to-orange-500 text-white font-semibold py-2 px-4 rounded hover:scale-105 transition-transform duration-200 transform translate-x-2"
+                >
+                    Close
+                </button>
             </Dialog>
         </>
     );
