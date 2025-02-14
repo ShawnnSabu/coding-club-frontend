@@ -168,7 +168,6 @@ const Events = () => {
                                 <p className="text-gray-200"><strong>Venue:</strong> {event.eventVenue}</p>
                                 <p className="text-gray-200"><strong>Mode:</strong> {event.eventMode}</p>
 
-                                <button onClick={() => handleRegisterClick(event)} className="mt-4 bg-white text-green-500 font-semibold py-2 px-4 rounded hover:bg-gray-200">Register</button>
                             </div>
                         ))
                     ) : (
