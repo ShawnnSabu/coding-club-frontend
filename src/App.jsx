@@ -16,10 +16,11 @@ import Events from "./components/Events";
 import Execom from "./components/Execom";
 import Contacts from "./components/Contacts";
 import { Toast } from "primereact/toast";
-import AdminLogin from "./adminPages/AdminLogin"; // newly created AdminLogin component
+import AdminLogin from "./adminPages/AdminLogin";
 import AdminDashboard from "./adminPages/AdminDashboard";
 import AdminEvents from "./adminPages/AdminEvents";
 import Loader from "./components/Loader/loader";
+import ProtectedAdminRoute from "./protectedRoutes/ProtectedAdminRoute";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -41,10 +42,8 @@ function App() {
   return (
     <div className="min-h-screen flex flex-col bg-black text-white font-source w-full h-full max-w-screen">
       {isLoading ? (
-        // Render only the Loader component when loading
         <Loader/>
       ) : (
-        // Render the rest of the app when not loading
         <>
           <Toast ref={toast} position="bottom-center" />
           <BrowserRouter>
@@ -55,8 +54,13 @@ function App() {
               <Route path="/contacts" element={<Contacts />} />
               <Route element={<RequireAuth />}></Route>
               <Route path="/admin-login" element={<AdminLogin />} />
-              <Route path="/admin-dashboard" element={<AdminDashboard />} />
-              <Route path="/admin-events/" element={<AdminEvents />} />
+
+              {/* Protected Admin Routes */}
+              <Route element={<ProtectedAdminRoute />}>
+                <Route path="/admin-dashboard" element={<AdminDashboard />} />
+                <Route path="/admin-events" element={<AdminEvents />} />
+              </Route>
+              
             </Routes>
             <Footer />
           </BrowserRouter>

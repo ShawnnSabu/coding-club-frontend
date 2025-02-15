@@ -6,6 +6,8 @@ import { Dialog } from "primereact/dialog";
 const Events = () => {
   const [events, setEvents] = useState([]);
   const [allEvents, setAllEvents] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [isSubmitting, setIsSubmitting] = useState(false);
   const [dialogVisible, setDialogVisible] = useState(false);
   const [successDialogVisible, setSuccessDialogVisible] = useState(false);
   const [errorDialogVisible, setErrorDialogVisible] = useState(false);
@@ -33,6 +35,8 @@ const Events = () => {
         setEvents(upcomingEvents);
       } catch (error) {
         console.error("Error fetching events", error);
+            }finally {
+                setIsLoading(false);
       }
     };
 
@@ -64,35 +68,39 @@ const Events = () => {
     setDialogVisible(true);
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevState) => ({ ...prevState, [name]: value }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/register`,
-        formData
-      );
-      console.log("Registration successful:", response.data);
-      setDialogVisible(false);
-      setFormData({
-        name: "",
-        branch: "",
-        year: "",
-        emailId: "",
-        mobileNo: "",
-        eventTitle: "",
-        eventDate: "",
-      });
-      setSuccessDialogVisible(true);
-    } catch (error) {
-      console.error("Error registering for event:", error);
-      setErrorDialogVisible(true);
-    }
-  };
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prevState => ({ ...prevState, [name]: value }));
+    };
+    
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setIsSubmitting(true); 
+    
+        try {
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/register`, formData);
+            console.log('Registration successful:', response.data);
+            setDialogVisible(false);
+            setFormData({
+                name: '',
+                college: '',
+                otherCollegeName: '',
+                branch: '',
+                year: '',
+                batch: '',
+                emailId: '',
+                mobileNo: '',
+                eventTitle: '',
+                eventDate: ''
+            });
+            setSuccessDialogVisible(true);
+        } catch (error) {
+            console.error("Error registering for event:", error);
+            setErrorDialogVisible(true);
+        } finally {
+            setIsSubmitting(false); 
+        }
+    };
 
   return (
     <>
@@ -106,58 +114,45 @@ const Events = () => {
           <div className="flex-auto border-b-4 "></div>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-10">
-          {events.length > 0 ? (
-            events.map((event) => (
-              <div
-                key={event._id}
-                className="event-card p-5 w-full sm:w-80 border rounded-lg shadow-lg transition-transform duration-200 hover:scale-[1.01] bg-gradient-to-b from-gray-700 to-black text-white text-center"
-              >
-                {event.eventImage && (
-                  <img
-                    src={`data:image/png;base64,${event.eventImage}`}
-                    alt={event.eventName}
-                    className="w-full h-60 object-cover overflow-hidden rounded-t-lg mb-4"
-                  />
-                )}
-                <h3 className="text-xl font-semibold mb-2 uppercase underline">
-                  {event.eventName}
-                </h3>
-                <p className="mb-2 font-normal text-gray-400">
-                  {event.eventDescription}
-                </p>
-                <p className="text-gray-200">
-                  <strong>Date: </strong>
-                  <span className="text-red-500">
-                    {new Date(event.eventDate).toLocaleString("en-US", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                      hour: "2-digit",
-                      minute: "2-digit",
-                      hour12: true,
-                    })}
-                  </span>
-                </p>
-                <p className="text-gray-200">
-                  <strong>Venue:</strong> {event.eventVenue}
-                </p>
-                <p className="text-gray-200">
-                  <strong>Mode:</strong> {event.eventMode}
-                </p>
+                {isLoading ? (
+                    <p className="text-lg font-semibold text-gray-400 text-center"> Loading the Upcoming Events... Please Wait!</p>                
+                ) : events.length > 0 ? (
+                    <div className="flex flex-wrap justify-center gap-4">
+                        {events.map(event => (
+                            <div key={event._id} className="event-card mb-6 p-5 w-80 border rounded-lg shadow-lg transition-transform duration-200 hover:scale-105 bg-gradient-to-b from-gray-700 to-black text-white text-center">
+                                {event.eventImage && (
+                                    <img 
+                                        src={`data:image/png;base64,${event.eventImage}`} 
+                                        alt={event.eventName} 
+                                        className="w-100 h-120 object-contain rounded-t-lg mb-4"
+                                    />
+                                )}
+                                <h3 className="text-xl font-semibold mb-2 uppercase underline">{event.eventName}</h3>
+                                <p className="mb-2 font-normal text-gray-400">{event.eventDescription}</p>
+                                <p className="text-gray-200">
+                                    <strong>Date: </strong> 
+                                    <span className="text-red-500">
+                                        {new Date(event.eventDate).toLocaleString("en-US", {
+                                            year: "numeric",
+                                            month: "long",
+                                            day: "numeric",
+                                            hour: "2-digit",
+                                            minute: "2-digit",
+                                            hour12: true
+                                        })}
+                                    </span>
+                                </p>
+                                <p className="text-gray-200"><strong>Venue:</strong> {event.eventVenue}</p>
+                                <p className="text-gray-200"><strong>Mode:</strong> {event.eventMode}</p>
 
-                <button
-                  onClick={() => handleRegisterClick(event)}
-                  className="mt-4 bg-white text-green-500 font-semibold py-2 px-4 rounded hover:bg-gray-200"
-                >
-                  Register
-                </button>
-              </div>
-            ))
-          ) : (
-            <p>No upcoming events currently</p>
-          )}
-        </div>
+                                <button onClick={() => handleRegisterClick(event)} className="mt-4 bg-white text-green-500 font-semibold py-2 px-4 rounded hover:bg-gray-200">Register</button>
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <p className="text-lg font-semibold text-gray-400">No upcoming events currently</p>
+                )}
+
 
         {/* All Events Section */}
         <div className="flex ">
@@ -207,7 +202,7 @@ const Events = () => {
               </div>
             ))
           ) : (
-            <p>Loading the events...Please Wait!</p>
+            <p className="text-lg font-semibold text-gray-400">Loading the Past Events...Please Wait!</p>
           )}
         </div>
       </div>
@@ -234,6 +229,20 @@ const Events = () => {
                 className="mb-3 p-2 border border-gray-300 rounded"
                 required
               />
+
+                            <label className="mb-1">College:</label>
+                            <select name="college" value={formData.college} onChange={handleInputChange} className="mb-3 p-2 border border-gray-300 rounded" required>
+                                <option value="">Select your college</option>
+                                <option value="TKMCE">TKMCE</option>
+                                <option value="Other">Other</option>
+                            </select>
+
+                            {formData.college === "Other" && (
+                                <>
+                                    <label className="mb-1">Enter your College Name:</label>
+                                    <input type="text" name="otherCollegeName" value={formData.otherCollegeName} onChange={handleInputChange} className="mb-3 p-2 border border-gray-300 rounded" required />
+                                </>
+                            )}
 
               <label className="mb-1">Branch:</label>
               <select
@@ -270,6 +279,14 @@ const Events = () => {
                 <option value="Fourth">Fourth</option>
               </select>
 
+                            <label className="mb-1">Batch:</label>
+                            <select name="batch" value={formData.batch} onChange={handleInputChange} className="mb-3 p-2 border border-gray-300 rounded" required>
+                                <option value="">Select your batch</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                            </select>
+
               <label className="mb-1">Email ID:</label>
               <input
                 type="email"
@@ -293,15 +310,20 @@ const Events = () => {
               <div className="flex w-full justify-center">
               <button
                 type="submit"
-                className="mt-4 w-32 bg-gradient-to-r from-red-500 to-blue-500 text-white font-semibold py-2 px-4 rounded hover:scale-105 transition-transform duration-200 transform translate-x-2"
+                className={`mt-4 w-32 bg-gradient-to-r from-red-500 to-blue-500 text-white font-semibold py-2 px-4 rounded hover:scale-105 transition-transform duration-200 transform translate-x-2 ${
+                                    isSubmitting ? "opacity-50 cursor-not-allowed" : ""
+                                }`}
+                                disabled={isSubmitting}
               >
-                Register
+                {isSubmitting ? "Registering..." : "Register"}
               </button>
+
               </div>
             </div>
           </form>
         </div>
       </Dialog>
+
 
       <Dialog
         header="Registration Successful"
@@ -309,7 +331,7 @@ const Events = () => {
         style={{ width: "30vw" }}
         onHide={() => setSuccessDialogVisible(false)}
       >
-        <p>Your registration was successful!</p>
+        <p>Your registration was successful! 🎉</p>
         <button
           onClick={() => setSuccessDialogVisible(false)}
           className="mt-4 w-32 bg-gradient-to-r from-green-500 to-blue-500 text-white font-semibold py-2 px-4 rounded hover:scale-105 transition-transform duration-200 transform translate-x-2"

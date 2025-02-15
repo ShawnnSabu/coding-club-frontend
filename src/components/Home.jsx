@@ -10,7 +10,7 @@ const Home = () => {
   const [showLogo, setShowLogo] = useState(false);
 
   useEffect(() => {
-    setShowLogo(true); // Trigger the homepage logo animation
+    setShowLogo(true); 
   }, []);
 
   return (

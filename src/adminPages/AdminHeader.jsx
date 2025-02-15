@@ -27,10 +27,7 @@ const AdminHeader = () => {
               Home
               <span className="absolute bottom-0 left-0 w-full h-[2px] bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"></span>
             </Link>
-            {/* <a className="relative hover:text-yellow-400 group cursor-pointer">
-              About Us
-              <span className="absolute bottom-0 left-0 w-full h-[2px] bg-yellow-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"></span>
-            </a> */}
+           
             <Link to="/admin-events" className="relative  group cursor-pointer">
               Events
               <span className="absolute bottom-0 left-0 w-full h-[2px] bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"></span>
@@ -62,13 +59,10 @@ const AdminHeader = () => {
                 className="relative  group cursor-pointer"
                 onClick={() => handleOnClick("/admin-dashboard")}
               >
-                Home
+                Admin-Home
                 <span className="absolute bottom-2 left-0 w-full h-[2px] bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"></span>
               </button>
-              {/* <a className="relative hover:text-yellow-400 group cursor-pointer">
-              About Us
-              <span className="absolute bottom-0 left-0 w-full h-[2px] bg-yellow-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"></span>
-            </a> */}
+              
               <button
                 className="relative  group cursor-pointer"
                 onClick={() => handleOnClick("/admin-events")}
