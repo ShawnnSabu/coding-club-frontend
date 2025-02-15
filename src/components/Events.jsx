@@ -6,6 +6,8 @@ import { Dialog } from "primereact/dialog";
 const Events = () => {
     const [events, setEvents] = useState([]);
     const [allEvents, setAllEvents] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const [dialogVisible, setDialogVisible] = useState(false);
     const [successDialogVisible, setSuccessDialogVisible] = useState(false);
     const [errorDialogVisible, setErrorDialogVisible] = useState(false);
@@ -29,6 +31,8 @@ const Events = () => {
                 setEvents(upcomingEvents);
             } catch (error) {
                 console.error("Error fetching events", error);
+            }finally {
+                setIsLoading(false);
             }
         };
 
@@ -61,26 +65,33 @@ const Events = () => {
         const { name, value } = e.target;
         setFormData(prevState => ({ ...prevState, [name]: value }));
     };
-
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsSubmitting(true); 
+    
         try {
-            const response = await axios.post(`${import.meta.env.VITE_API_URL}/register`, formData); 
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/register`, formData);
             console.log('Registration successful:', response.data);
-            setDialogVisible(false); 
+            setDialogVisible(false);
             setFormData({
                 name: '',
+                college: '',
+                otherCollegeName: '',
                 branch: '',
                 year: '',
+                batch: '',
                 emailId: '',
                 mobileNo: '',
                 eventTitle: '',
-                eventDate: ''   
-            }); 
+                eventDate: ''
+            });
             setSuccessDialogVisible(true);
         } catch (error) {
             console.error("Error registering for event:", error);
             setErrorDialogVisible(true);
+        } finally {
+            setIsSubmitting(false); 
         }
     };
 
@@ -96,9 +107,11 @@ const Events = () => {
                     <div className="flex-auto border-b-4 mb-2 ml-2"></div>
                 </div>
 
-                <div className="flex flex-wrap justify-center gap-4">
-                    {events.length > 0 ? (
-                        events.map(event => (
+                {isLoading ? (
+                    <p className="text-lg font-semibold text-gray-400 text-center"> Loading the Upcoming Events... Please Wait!</p>                
+                ) : events.length > 0 ? (
+                    <div className="flex flex-wrap justify-center gap-4">
+                        {events.map(event => (
                             <div key={event._id} className="event-card mb-6 p-5 w-80 border rounded-lg shadow-lg transition-transform duration-200 hover:scale-105 bg-gradient-to-b from-gray-700 to-black text-white text-center">
                                 {event.eventImage && (
                                     <img 
@@ -127,11 +140,12 @@ const Events = () => {
 
                                 <button onClick={() => handleRegisterClick(event)} className="mt-4 bg-white text-green-500 font-semibold py-2 px-4 rounded hover:bg-gray-200">Register</button>
                             </div>
-                        ))
-                    ) : (
-                        <p>No upcoming events currently</p>
-                    )}
-                </div>
+                        ))}
+                    </div>
+                ) : (
+                    <p className="text-lg font-semibold text-gray-400">No upcoming events currently</p>
+                )}
+
 
                 {/* All Events Section */}
                 <div className="flex sm:mt-7 mb-24 mt-20">
@@ -171,7 +185,7 @@ const Events = () => {
                             </div>
                         ))
                     ) : (
-                        <p>Loading the events...Please Wait!</p>
+                        <p className="text-lg font-semibold text-gray-400">Loading the Past Events...Please Wait!</p>
                     )}
                 </div>
             </div>
@@ -183,6 +197,20 @@ const Events = () => {
                         <div className="flex flex-col">
                             <label className="mb-1">Name:</label>
                             <input type="text" name="name" value={formData.name} onChange={handleInputChange} className="mb-3 p-2 border border-gray-300 rounded" required />
+
+                            <label className="mb-1">College:</label>
+                            <select name="college" value={formData.college} onChange={handleInputChange} className="mb-3 p-2 border border-gray-300 rounded" required>
+                                <option value="">Select your college</option>
+                                <option value="TKMCE">TKMCE</option>
+                                <option value="Other">Other</option>
+                            </select>
+
+                            {formData.college === "Other" && (
+                                <>
+                                    <label className="mb-1">Enter your College Name:</label>
+                                    <input type="text" name="otherCollegeName" value={formData.otherCollegeName} onChange={handleInputChange} className="mb-3 p-2 border border-gray-300 rounded" required />
+                                </>
+                            )}
 
                             <label className="mb-1">Branch:</label>
                             <select name="branch" value={formData.branch} onChange={handleInputChange} className="mb-3 p-2 border border-gray-300 rounded" required>
@@ -207,6 +235,14 @@ const Events = () => {
                                 <option value="Fourth">Fourth</option>
                             </select>
 
+                            <label className="mb-1">Batch:</label>
+                            <select name="batch" value={formData.batch} onChange={handleInputChange} className="mb-3 p-2 border border-gray-300 rounded" required>
+                                <option value="">Select your batch</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                            </select>
+
                             <label className="mb-1">Email ID:</label>
                             <input type="email" name="emailId" value={formData.emailId} onChange={handleInputChange} className="mb-3 p-2 border border-gray-300 rounded" required />
 
@@ -215,14 +251,19 @@ const Events = () => {
 
                             <button
                                 type="submit"
-                                className="mt-4 w-32 bg-gradient-to-r from-red-500 to-blue-500 text-white font-semibold py-2 px-4 rounded hover:scale-105 transition-transform duration-200 transform translate-x-2"
+                                className={`mt-4 w-32 bg-gradient-to-r from-red-500 to-blue-500 text-white font-semibold py-2 px-4 rounded hover:scale-105 transition-transform duration-200 transform translate-x-2 ${
+                                    isSubmitting ? "opacity-50 cursor-not-allowed" : ""
+                                }`}
+                                disabled={isSubmitting}
                             >
-                                Register
+                                {isSubmitting ? "Registering..." : "Register"}
                             </button>
+
                         </div>
                     </form>
                 </div>
             </Dialog>
+
             
             <Dialog
                 header="Registration Successful"
@@ -230,7 +271,7 @@ const Events = () => {
                 style={{ width: '30vw' }}
                 onHide={() => setSuccessDialogVisible(false)}
             >
-                <p>Your registration was successful!</p>
+                <p>Your registration was successful! 🎉</p>
                 <button
                     onClick={() => setSuccessDialogVisible(false)}
                     className="mt-4 w-32 bg-gradient-to-r from-green-500 to-blue-500 text-white font-semibold py-2 px-4 rounded hover:scale-105 transition-transform duration-200 transform translate-x-2"

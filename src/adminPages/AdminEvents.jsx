@@ -25,6 +25,8 @@ const AdminEvents = () => {
   const [pastEvents, setPastEvents] = useState([]);
   const [registrations, setRegistrations] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [successDialogVisible, setSuccessDialogVisible] = useState(false);
 
   const fetchEvents = async () => {
     try {
@@ -62,17 +64,19 @@ const AdminEvents = () => {
   }, []);
 
   const handleAddEvent = async () => {
+    if (isSubmitting) return; 
+    setIsSubmitting(true);
+  
     const formData = new FormData();
     formData.append("name", eventName);
     formData.append("description", eventDescription);
     formData.append("date", eventDate);
     formData.append("venue", eventVenue);
     formData.append("mode", eventMode);
-    console.log("hi");
     if (eventImage) {
       formData.append("image", eventImage);
     }
-
+  
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/events`,
@@ -83,11 +87,14 @@ const AdminEvents = () => {
           },
         }
       );
-      console.log("Event Added", response.data);
-      setDialogVisible(false);
+      
+      setDialogVisible(false); 
+      setSuccessDialogVisible(true); 
       resetForm();
     } catch (error) {
       console.error("Error adding event", error);
+    } finally {
+      setIsSubmitting(false); 
     }
   };
 
@@ -133,18 +140,21 @@ const AdminEvents = () => {
     setIsRegModal(true);
   };
 
-  //   const closeRegistrationDialog = () => {
-  //     setIsRegModal(false);
-  //     setRegistrations([]);
-  //   };
+ 
 
   const downloadExcel = (data) => {
+    if (!data.length) return;
+  
+    const eventName = data[0].eventTitle.replace(/\s+/g, "_"); 
+    const fileName = `${eventName}_registrations.xlsx`;
+  
     const worksheet = XLSX.utils?.json_to_sheet(data);
     const workbook = XLSX.utils?.book_new();
     XLSX.utils?.book_append_sheet(workbook, worksheet, "Registrations");
-
-    XLSX.writeFile(workbook, "registrations.xlsx");
+  
+    XLSX.writeFile(workbook, fileName);
   };
+  
 
   return (
     <div className="admin-dashboard-container">
@@ -369,15 +379,40 @@ const AdminEvents = () => {
           </div>
 
           <div className="flex justify-center w-full">
-            <button
-              onClick={handleAddEvent}
-              className="mt-5 bg-gradient-to-r from-green-500 to-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:from-green-600 hover:to-blue-600 transition-colors duration-200"
-            >
-              Save Event
-            </button>
+          <button
+            onClick={handleAddEvent}
+            disabled={isSubmitting} 
+            className={`mt-5 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200 ${
+              isSubmitting
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600"
+            }`}
+          >
+            {isSubmitting ? "Saving..." : "Save Event"}
+          </button>
           </div>
         </div>
       </Dialog>
+
+
+      <Dialog
+        header="Success!"
+        visible={successDialogVisible}
+        style={{ width: "50%" }}
+        onHide={() => setSuccessDialogVisible(false)}
+        className="rounded-lg animate__animated animate__fadeInDown"
+      >
+        <p className="text-lg text-center">Event added successfully! 🎉</p>
+        <div className="flex justify-center">
+          <button
+            onClick={() => setSuccessDialogVisible(false)}
+            className="mt-3 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+          >
+            OK
+          </button>
+        </div>
+      </Dialog>
+
 
       {isRegModal && (
         <EventModal
