@@ -1,4 +1,3 @@
-// AdminLogin.jsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
@@ -16,20 +15,33 @@ const AdminLogin = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Username:", username);
-    console.log("Password:", password);
+    const trimmedUsername = username.trim();
+    const trimmedPassword = password.trim();
 
-    if (username === "ccclub" && password === "ccclub@2024") {
-        navigate("/admin-dashboard");
-    } else {
-      if (username !== "ccclub") {
-        setErrorMessage("OOPS !!!, Username is wrong Try Again");
-      } else if (password !== "ccclub@2024") {
-        setErrorMessage("OOPS !!!, Password is wrong Try Again");
+
+    fetch("http://localhost:5000/admin-login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ username: trimmedUsername, password: trimmedPassword })
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log("Response message:", `"${data.message}"`, typeof data.message); 
+  
+      if (data.message.trim() === "Login successful") {  
+        localStorage.setItem("CCAdminToken", "true");
+        navigate("/admin-dashboard");  
+      } else {
+          setErrorMessage(data.message);
+          setDialogVisible(true);
       }
-      setDialogVisible(true);  // Show the dialog if credentials are wrong
-    }
-  };
+  })
+    .catch(error => console.error("Error logging in:", error));
+};
+
+  
 
   const handleClose = () => {
     setDialogVisible(false);
@@ -50,8 +62,6 @@ const AdminLogin = () => {
         <p>{errorMessage}</p>
       </Dialog>
 
-
-      {/* Gradient background container */}
       <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-gray-500 to-white">
         <div className="bg-white shadow-lg rounded-lg p-8">
           <h1 className="text-2xl font-bold mb-4">Admin Login</h1>
@@ -91,6 +101,8 @@ const AdminLogin = () => {
           </form>
         </div>
       </div>
+
+
     </>
   );
 };
