@@ -121,14 +121,11 @@ const AdminEvents = () => {
   ];
 
   const openRegistrationDialog = async (eventName) => {
-    console.log("Opening registration dialog for event:", eventName);
     setSelectedEvent(eventName);
 
     try {
       const encodedEventName = encodeURIComponent(eventName);
-      const url = `${
-        import.meta.env.VITE_API_URL
-      }/events/${encodedEventName}/registrations`;
+      const url = `${import.meta.env.VITE_API_URL}/events/${encodedEventName}/registrations`;
       console.log("Constructed URL:", url);
       const response = await axios.get(url);
       console.log("Fetched registrations:", response.data);
