@@ -19,7 +19,7 @@ const AdminLogin = () => {
     const trimmedPassword = password.trim();
 
 
-    fetch("http://localhost:5000/admin-login", {
+    fetch(`${import.meta.env.VITE_API_URL}/admin-login`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
