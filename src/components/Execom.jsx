@@ -31,7 +31,7 @@ const Execom = () => {
       members: [
         {
           id: 0,
-          name: "Prof. Shameem Ansar A",
+          name: "Dr. Shameem Ansar A",
           role: "Faculty Coordinator",
           image: Shameem,
         },
