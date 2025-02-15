@@ -184,7 +184,7 @@ const AdminEvents = () => {
               events.map((event) => (
                 <div
                   key={event._id}
-                  className="event-card w-full sm:w-80 overflow-hidden  p-5 border rounded-lg shadow-lg transition-transform duration-200 hover:scale-[1.01] bg-gradient-to-b from-gray-700 to-black text-white text-center"
+                  className="event-card w-[90%] sm:w-80 overflow-hidden  p-5 border rounded-lg shadow-lg transition-transform duration-200 hover:scale-[1.01] bg-gradient-to-b from-gray-700 to-black text-white text-center"
                 >
                   <div className="w-full h-60 overflow-hidden mb-4 rounded-lg">
                     <img
@@ -244,7 +244,7 @@ const AdminEvents = () => {
               pastEvents.map((event) => (
                 <div
                   key={event._id}
-                  className="event-card  p-5 w-full sm:w-80 border rounded-lg shadow-lg transition-transform duration-200 hover:scale-105 bg-gradient-to-b from-gray-900 to-gray-700 text-white text-center"
+                  className="event-card  p-5 w-[90%] sm:w-80 border rounded-lg shadow-lg transition-transform duration-200 hover:scale-105 bg-gradient-to-b from-gray-900 to-gray-700 text-white text-center"
                 >
                   <img
                     src={
