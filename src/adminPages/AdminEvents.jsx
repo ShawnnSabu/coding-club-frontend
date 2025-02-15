@@ -237,7 +237,7 @@ const AdminEvents = () => {
               pastEvents.map((event) => (
                 <div
                   key={event._id}
-                  className="event-card  p-5 w-80 border rounded-lg shadow-lg transition-transform duration-200 hover:scale-105 bg-gradient-to-b from-gray-900 to-gray-700 text-white text-center"
+                  className="event-card  p-5 w-full sm:w-80 border rounded-lg shadow-lg transition-transform duration-200 hover:scale-105 bg-gradient-to-b from-gray-900 to-gray-700 text-white text-center"
                 >
                   <img
                     src={
@@ -245,7 +245,7 @@ const AdminEvents = () => {
                       "ccLogo.svg"
                     }
                     alt={event.eventName}
-                    className="h-60 w-full object-contain rounded-lg mb-4"
+                    className="h-60 w-full object-cover rounded-lg mb-4"
                   />
                   <h3 className="text-xl font-semibold mb-2 uppercase underline">
                     {event.eventName}
@@ -292,7 +292,7 @@ const AdminEvents = () => {
           <div>
             <label htmlFor="eventName" className="block mb-2">
               Event Name
-            </label>
+            </label> 
             <InputText
               id="eventName"
               value={eventName}
