@@ -44,10 +44,10 @@ const Execom = () => {
       members: [
         {
           id: 1,
-          name: "Sangeeth",
+          name: "Sangeeth ",
           //   role: "Faculty Coordinator",
           image: Sangeeth,
-          linkedin: "https://www.linkedin.com/in/sreeresh-profile",
+          linkedin: "https://www.linkedin.com/in/sangeeth-s-872aa6282?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
 
         },
         {
@@ -55,7 +55,7 @@ const Execom = () => {
           name: "Sona",
           //   role: "Faculty Coordinator",
           image: Sona,
-          linkedin: "https://www.linkedin.com/in/sreeresh-profile",
+          linkedin: "https://www.linkedin.com/in/sona-f-shukoor",
 
         },
       ],
@@ -66,13 +66,13 @@ const Execom = () => {
         {
           name: "Aron",
           image: Aron,
-          linkedin: "https://www.linkedin.com/in/sreeresh-profile",
+          linkedin: "https://www.linkedin.com/in/amtom",
 
         },
         {
           name: "Rohit",
           image: Rohit,
-          linkedin: "https://www.linkedin.com/in/sreeresh-profile",
+          linkedin: "https://www.linkedin.com/in/rohith-mahesh-79b714291?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
 
         },
       ],
@@ -83,7 +83,7 @@ const Execom = () => {
         {
           name: "Afeef",
           image: Afeef,
-          linkedin: "https://www.linkedin.com/in/sreeresh-profile",
+          linkedin: "https://www.linkedin.com/in/mohamed-afeef-8638ba25a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
 
         },
       ],
@@ -100,7 +100,7 @@ const Execom = () => {
         {
           name: "Amit",
           image: Amit,
-          linkedin: "https://www.linkedin.com/in/sreeresh-profile",
+          linkedin: "https://www.linkedin.com/in/amitstredz",
 
         },
       ],
@@ -111,13 +111,13 @@ const Execom = () => {
         {
           name: "Mizhab",
           image: Mizhab,
-          linkedin: "https://www.linkedin.com/in/sreeresh-profile",
+          linkedin: "https://www.linkedin.com/in/muhammed-mizhab-m-m-39259a211",
 
         },
         {
           name: "Vishnu",
           image: Vishnu,
-          linkedin: "https://www.linkedin.com/in/sreeresh-profile",
+          linkedin: "https://www.linkedin.com/in/vishnumeta/",
 
         },
       ],
@@ -129,21 +129,21 @@ const Execom = () => {
           name: "Hridya",
           position: "Head",
           image: Hridya,
-          linkedin: "https://www.linkedin.com/in/sreeresh-profile",
+          linkedin: "https://www.linkedin.com/in/hridyab",
 
         },
 
         {
           name: "Jeff",
           image: Jeff,
-          linkedin: "https://www.linkedin.com/in/sreeresh-profile",
+          linkedin: "https://in.linkedin.com/in/jeff-varghese-jo-92621b257",
 
         },
 
         {
           name: "Angelina",
           image: Angelina,
-          linkedin: "https://www.linkedin.com/in/sreeresh-profile",
+          linkedin: "https://www.linkedin.com/in/angelina-rose-9b312b324?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
 
         },
        
@@ -155,25 +155,25 @@ const Execom = () => {
         {
           name: "Shikha",
           image: Shikha,
-          linkedin: "https://www.linkedin.com/in/sreeresh-profile",
+          linkedin: "https://www.linkedin.com/in/shikha-rajeev-586808300",
 
         },
         {
           name: "Alan",
           image: Alan,
-          linkedin: "https://www.linkedin.com/in/sreeresh-profile",
+          linkedin: "https://www.linkedin.com/in/alansj",
 
         },
         {
           name: "Jobin",
           image: Jobin,
-          linkedin: "https://www.linkedin.com/in/sreeresh-profile",
+          linkedin: " https://www.linkedin.com/in/jobin-a-j-75b249324?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
 
         },
         {
           name: "Swarag",
           image: Swarag,
-          linkedin: "https://www.linkedin.com/in/sreeresh-profile",
+          linkedin: "https://www.linkedin.com/in/swarag-siby-667933291/",
 
         },
       ],
@@ -184,31 +184,31 @@ const Execom = () => {
         {
           name: "Johan",
           image: Johan,
-          linkedin: "https://www.linkedin.com/in/sreeresh-profile",
+          linkedin: "https://www.linkedin.com/in/johan-sergi-7a3489271?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
 
         },
         {
           name: "Aditya",
           image: Aditya,
-          linkedin: "https://www.linkedin.com/in/sreeresh-profile",
+          linkedin: "https://www.linkedin.com/in/adityacm",
 
         },
       ],
     },
     {
-      title: "Documentatino Team",
+      title: "Documentation Team",
       members: [
         {
           name: "Liya",
           position: "Head",
           image: Liya,
-          linkedin: "https://www.linkedin.com/in/sreeresh-profile",
+          linkedin: "https://www.linkedin.com/in/liya-fathima-b8148a26b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
 
         },
         {
           name: "Fathima",
           image: Fathima,
-          linkedin: "https://www.linkedin.com/in/sreeresh-profile",
+          linkedin: "http://linkedin.com/in/fathima-hariz-15532729a",
 
         },
       ],
