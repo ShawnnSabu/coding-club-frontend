@@ -34,6 +34,8 @@ const Execom = () => {
           name: "Dr. Shameem Ansar A",
           role: "Faculty Coordinator",
           image: Shameem,
+          linkedin: "https://www.linkedin.com/in/sreeresh-profile",
+
         },
       ],
     },
@@ -45,12 +47,16 @@ const Execom = () => {
           name: "Sangeeth",
           //   role: "Faculty Coordinator",
           image: Sangeeth,
+          linkedin: "https://www.linkedin.com/in/sreeresh-profile",
+
         },
         {
           //   id: 1,
           name: "Sona",
           //   role: "Faculty Coordinator",
           image: Sona,
+          linkedin: "https://www.linkedin.com/in/sreeresh-profile",
+
         },
       ],
     },
@@ -60,10 +66,14 @@ const Execom = () => {
         {
           name: "Aron",
           image: Aron,
+          linkedin: "https://www.linkedin.com/in/sreeresh-profile",
+
         },
         {
           name: "Rohit",
           image: Rohit,
+          linkedin: "https://www.linkedin.com/in/sreeresh-profile",
+
         },
       ],
     },
@@ -73,6 +83,8 @@ const Execom = () => {
         {
           name: "Afeef",
           image: Afeef,
+          linkedin: "https://www.linkedin.com/in/sreeresh-profile",
+
         },
       ],
     },
@@ -82,10 +94,14 @@ const Execom = () => {
         {
           name: "Sreeresh",
           image: Sreeresh,
+          linkedin: "https://www.linkedin.com/in/sreeresh-ss-65b5b9257",
+
         },
         {
           name: "Amit",
           image: Amit,
+          linkedin: "https://www.linkedin.com/in/sreeresh-profile",
+
         },
       ],
     },
@@ -95,10 +111,14 @@ const Execom = () => {
         {
           name: "Mizhab",
           image: Mizhab,
+          linkedin: "https://www.linkedin.com/in/sreeresh-profile",
+
         },
         {
           name: "Vishnu",
           image: Vishnu,
+          linkedin: "https://www.linkedin.com/in/sreeresh-profile",
+
         },
       ],
     },
@@ -109,15 +129,24 @@ const Execom = () => {
           name: "Hridya",
           position: "Head",
           image: Hridya,
+          linkedin: "https://www.linkedin.com/in/sreeresh-profile",
+
         },
-        {
-          name: "Angelina",
-          image: Angelina,
-        },
+
         {
           name: "Jeff",
           image: Jeff,
+          linkedin: "https://www.linkedin.com/in/sreeresh-profile",
+
         },
+
+        {
+          name: "Angelina",
+          image: Angelina,
+          linkedin: "https://www.linkedin.com/in/sreeresh-profile",
+
+        },
+       
       ],
     },
     {
@@ -126,18 +155,26 @@ const Execom = () => {
         {
           name: "Shikha",
           image: Shikha,
+          linkedin: "https://www.linkedin.com/in/sreeresh-profile",
+
         },
         {
           name: "Alan",
           image: Alan,
+          linkedin: "https://www.linkedin.com/in/sreeresh-profile",
+
         },
         {
           name: "Jobin",
           image: Jobin,
+          linkedin: "https://www.linkedin.com/in/sreeresh-profile",
+
         },
         {
           name: "Swarag",
           image: Swarag,
+          linkedin: "https://www.linkedin.com/in/sreeresh-profile",
+
         },
       ],
     },
@@ -147,10 +184,14 @@ const Execom = () => {
         {
           name: "Johan",
           image: Johan,
+          linkedin: "https://www.linkedin.com/in/sreeresh-profile",
+
         },
         {
           name: "Aditya",
           image: Aditya,
+          linkedin: "https://www.linkedin.com/in/sreeresh-profile",
+
         },
       ],
     },
@@ -161,10 +202,14 @@ const Execom = () => {
           name: "Liya",
           position: "Head",
           image: Liya,
+          linkedin: "https://www.linkedin.com/in/sreeresh-profile",
+
         },
         {
           name: "Fathima",
           image: Fathima,
+          linkedin: "https://www.linkedin.com/in/sreeresh-profile",
+
         },
       ],
     },
@@ -202,6 +247,22 @@ const Execom = () => {
               />
 
               <span>{member.name} </span>
+              
+              {member.linkedin && (
+                <a
+                  href={member.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Check LinkedIn profile"
+                >
+                  <img
+                    src="/linkedIn.png"
+                    alt="LinkedIn"
+                    className="w-6 h-6 object-contain rounded-lg"
+                  />
+                </a>
+              )}
+
             </div>
           </div>
         ))}
