@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 export default function Login() {
   return (
     <div className="login-root">
@@ -95,16 +97,19 @@ export default function Login() {
           <span className="campus">TKMCE</span>
         </div>
 
-        <h1 className="title"><span className="angle">&lt;</span>Login<span className="angle">&gt;</span></h1>
+        <h1 className="title">
+          <span className="angle">&lt;</span>Login
+          <span className="angle">&gt;</span>
+        </h1>
 
         <section className="card">
           <div className="grid">
             <div className="pitch">
               <h2>WELCOME BACK</h2>
-              <p>Sign in to continue collaborating with passionate coders and creators</p>
-              <button className="aboutBtn" type="button" onClick={() => alert('About Coding Club TKMCE')}>
-                About us
-              </button>
+              <p>
+                Sign in to continue collaborating with passionate coders and
+                creators
+              </p>
             </div>
 
             <LoginForm />
@@ -116,62 +121,119 @@ export default function Login() {
 }
 
 function LoginForm() {
-  function onSubmit(e) {
+  const navigate = useNavigate();
+  async function onSubmit(e) {
     e.preventDefault();
     const f = new FormData(e.currentTarget);
-    const email = String(f.get('email') || '').trim();
-    const password = String(f.get('password') || '');
+    const email = String(f.get("email") || "").trim();
+    const password = String(f.get("password") || "");
 
-    const status = e.currentTarget.querySelector('.status');
+    const status = e.currentTarget.querySelector(".status");
 
     if (!email || !password) {
-      status.textContent = 'Please enter email and password.';
-      status.className = 'status err';
+      status.textContent = "Please enter email and password.";
+      status.className = "status err";
       return;
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      status.textContent = 'Please enter a valid email.';
-      status.className = 'status err';
+      status.textContent = "Please enter a valid email.";
+      status.className = "status err";
       return;
     }
 
-    // Replace with your real auth call
-    // fetch('/api/login', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ email, password }) })
-    //  .then(r => r.ok ? r.json() : Promise.reject(r))
-    //  .then(() => { status.textContent='Signed in!'; status.className='status ok' })
-    //  .catch(() => { status.textContent='Login failed'; status.className='status err' });
+    status.textContent = "Signing in...";
+    status.className = "status";
 
-    setTimeout(() => {
-      status.textContent = 'Signed in! (Demo — wire this to your backend)';
-      status.className = 'status ok';
-      e.currentTarget.reset();
-    }, 450);
+    try {
+      const res = await fetch(`${process.env.API_BASE_URL}/api/members/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ emailID: email, password }),
+      });
+
+      const data = await res.json();
+      
+      if (res.ok) {
+        status.textContent = data.message || "Login successful";
+        status.className = "status ok";
+        
+        if (data.token) {
+          localStorage.setItem('authToken', data.token);
+        }
+        if (data.user) {
+          localStorage.setItem('user', JSON.stringify(data.user));
+        }
+        
+        setTimeout(() => {
+          // go to profile
+          // for now it goes to website
+          navigate('/')
+          console.log('Redirecting to dashboard...');
+        }, 1000);
+        
+        console.log('Login successful:', data);
+        
+      } else {
+        status.textContent = data.message || `Error ${res.status}`;
+        status.className = "status err";
+      }
+    } catch (err) {
+      console.error('Login error:', err);
+      status.textContent = "Network error. Please check your connection.";
+      status.className = "status err";
+    }
   }
 
   return (
     <form className="form" onSubmit={onSubmit}>
       <div className="field">
-        <label className="label" htmlFor="email">Email ID <span className="dash" /></label>
-        <input id="email" name="email" className="input" type="email" placeholder="abc@college.edu" />
+        <label className="label" htmlFor="email">
+          Email ID <span className="dash" />
+        </label>
+        <input
+          id="email"
+          name="email"
+          className="input"
+          type="email"
+          placeholder="abc@college.edu"
+        />
       </div>
 
       <div className="field">
-        <label className="label" htmlFor="password">Password <span className="dash" /></label>
-        <input id="password" name="password" className="input" type="password" placeholder="Emter Your password" />
+        <label className="label" htmlFor="password">
+          Password <span className="dash" />
+        </label>
+        <input
+          id="password"
+          name="password"
+          className="input"
+          type="password"
+          placeholder="Enter Your password"
+        />
       </div>
 
       <div className="extras">
         <label className="check">
           <input type="checkbox" name="remember" /> <span>Remember me</span>
         </label>
-        <a className="muted-link" href="#">Forgot password?</a>
+        <a className="muted-link" href="#">
+          Forgot password?
+        </a>
       </div>
 
       <div className="actions">
-        <button type="submit" className="cta">Sign in</button>
+        <button type="submit" className="cta">
+          Sign in
+        </button>
       </div>
 
-      <p className="alt">Don’t have an account? <a className="link" href="/register">Register</a></p>
+      <p className="alt">
+        Don't have an account?{" "}
+        <a className="link" href="/register">
+          Register
+        </a>
+      </p>
       <p className="status" />
     </form>
   );

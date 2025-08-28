@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 export default function Register() {
   return (
     <div className="registration-root">
@@ -122,7 +124,10 @@ export default function Register() {
           <span className="campus">TKMCE</span>
         </div>
 
-        <h1 className="title"><span className="angle">&lt;</span>Registration<span className="angle">&gt;</span></h1>
+        <h1 className="title">
+          <span className="angle">&lt;</span>Registration
+          <span className="angle">&gt;</span>
+        </h1>
 
         {/* card */}
         <section className="card">
@@ -130,8 +135,15 @@ export default function Register() {
             {/* left copy */}
             <div className="pitch">
               <h2>JOIN US</h2>
-              <p>Collaborate &amp; connect with passionate coders and creators like you</p>
-              <button className="aboutBtn" type="button" onClick={() => alert('About Coding Club TKMCE')}>
+              <p>
+                Collaborate &amp; connect with passionate coders and creators
+                like you
+              </p>
+              <button
+                className="aboutBtn"
+                type="button"
+                onClick={() => alert("About Coding Club TKMCE")}
+              >
                 About us
               </button>
             </div>
@@ -146,54 +158,178 @@ export default function Register() {
 }
 
 function FormBlock() {
-  function onSubmit(e) {
+  const navigate = useNavigate();
+
+  async function onSubmit(e) {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
-    const fields = ['name','year','branch','email'];
-    const missing = fields.filter(k => !String(data.get(k) || '').trim());
+    const name = String(data.get("name") || "").trim();
+    const year = String(data.get("year") || "").trim();
+    const branch = String(data.get("branch") || "").trim();
+    const email = String(data.get("email") || "").trim();
+    const password = String(data.get("password") || "").trim();
+    const confirmPassword = String(data.get("confirmPassword") || "").trim();
 
-    const status = e.currentTarget.querySelector('.status');
+    const status = e.currentTarget.querySelector(".status");
+    const fields = ["name", "year", "branch", "email", "password"];
+    const values = { name, year, branch, email, password };
+    const missing = fields.filter((field) => !values[field]);
+
     if (missing.length) {
-      status.textContent = 'Please fill all fields.';
-      status.className = 'status err';
+      status.textContent = "Please fill all required fields.";
+      status.className = "status err";
       return;
     }
-    const email = String(data.get('email') || '');
-    if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) {
-      status.textContent = 'Enter a valid email address.';
-      status.className = 'status err';
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      status.textContent = "Enter a valid email address.";
+      status.className = "status err";
       return;
     }
-    status.textContent = 'Registered! (Demo only — connect to your API)';
-    status.className = 'status ok';
-    e.currentTarget.reset();
+
+    if (isNaN(year) || year < 1 || year > 4) {
+      status.textContent = "Please enter a valid year 1-4.";
+      status.className = "status err";
+      return;
+    }
+
+    if (password.length < 6) {
+      status.textContent = "Password must be at least 6 characters long.";
+      status.className = "status err";
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      status.textContent = "Passwords do not match.";
+      status.className = "status err";
+      return;
+    }
+
+    status.textContent = "Creating account...";
+    status.className = "status";
+
+    try {
+      const res = await fetch(`${process.env.API_BASE_URL}/api/members/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({
+          name,
+          branch,
+          emailID: email,
+          year: parseInt(year),
+          password,
+        }),
+      });
+
+      const responseData = await res.json();
+
+      if (res.ok) {
+        status.textContent = responseData.message || "Registration successful!";
+        status.className = "status ok";
+
+        setTimeout(() => {
+          navigate("/Login");
+          console.log("Registration successful! Redirect to login...");
+        }, 2000);
+
+        console.log("Registration successful:", responseData);
+      } else {
+        status.textContent =
+          responseData.message || `Registration failed (${res.status})`;
+        status.className = "status err";
+        console.error("Registration failed:", responseData);
+      }
+    } catch (err) {
+      console.error("Registration error:", err);
+      status.textContent = "Network error. Please check your connection.";
+      status.className = "status err";
+    }
   }
 
   return (
     <form className="form" onSubmit={onSubmit}>
       <div className="field">
-        <label className="label" htmlFor="name">Name <span className="dash" /></label>
-        <input id="name" name="name" className="input" placeholder="Your name" />
+        <label className="label" htmlFor="name">
+          Name <span className="dash" />
+        </label>
+        <input
+          id="name"
+          name="name"
+          className="input"
+          placeholder="Your name"
+        />
       </div>
 
       <div className="field">
-        <label className="label" htmlFor="year">Year <span className="dash" /></label>
-        <input id="year" name="year" className="input" placeholder="1st / 2nd / 3rd / 4th" />
+        <label className="label" htmlFor="year">
+          Year <span className="dash" />
+        </label>
+        <input
+          id="year"
+          name="year"
+          className="input"
+          placeholder="1st / 2nd / 3rd / 4th"
+        />
       </div>
 
       <div className="field">
-        <label className="label" htmlFor="branch">Branch <span className="dash" /></label>
-        <input id="branch" name="branch" className="input" placeholder="CSE / ECE / ..." />
+        <label className="label" htmlFor="branch">
+          Branch <span className="dash" />
+        </label>
+        <input
+          id="branch"
+          name="branch"
+          className="input"
+          placeholder="CSE / ECE / ..."
+        />
       </div>
 
       <div className="field">
-        <label className="label" htmlFor="email">Email ID <span className="dash" /></label>
-        <input id="email" name="email" className="input" type="email" placeholder="abc@tkmce.ac.in" />
+        <label className="label" htmlFor="email">
+          Email ID <span className="dash" />
+        </label>
+        <input
+          id="email"
+          name="email"
+          className="input"
+          type="email"
+          placeholder="abc@tkmce.ac.in"
+        />
+      </div>
+
+      <div className="field">
+        <label className="label" htmlFor="password">
+          Password <span className="dash" />
+        </label>
+        <input
+          id="password"
+          name="password"
+          className="input"
+          type="password"
+          placeholder="Enter password"
+        />
+      </div>
+
+      <div className="field">
+        <label className="label" htmlFor="confirmPassword">
+          Confirm <span className="dash" />
+        </label>
+        <input
+          id="confirmPassword"
+          name="confirmPassword"
+          className="input"
+          type="password"
+          placeholder="Confirm password"
+        />
       </div>
 
       <div className="actions">
-        <button className="cta" type="submit">Register</button>
+        <button className="cta" type="submit">
+          Register
+        </button>
       </div>
+
       <p className="status" />
     </form>
   );
