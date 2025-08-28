@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { API_ENDPOINTS } from "../apis/api";
 
 export default function Register() {
   return (
@@ -209,7 +210,7 @@ function FormBlock() {
     status.className = "status";
 
     try {
-      const res = await fetch(`${process.env.API_BASE_URL}/api/members/register`, {
+      const res = await fetch(`${API_ENDPOINTS.REGISTER}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { API_ENDPOINTS } from "../apis/api";
 
 export default function Login() {
   return (
@@ -145,7 +146,7 @@ function LoginForm() {
     status.className = "status";
 
     try {
-      const res = await fetch(`${process.env.API_BASE_URL}/api/members/login`, {
+      const res = await fetch(`${API_ENDPOINTS.LOGIN}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
