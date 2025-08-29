@@ -330,7 +330,6 @@ function FormBlock() {
           Register
         </button>
       </div>
-
       <p className="status" />
     </form>
   );

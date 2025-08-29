@@ -100,7 +100,6 @@ export default function Login() {
 
         <h1 className="title">
           <span className="angle">&lt;</span>Login
-          <span className="angle">&gt;</span>
         </h1>
 
         <section className="card">
@@ -238,4 +237,3 @@ function LoginForm() {
       <p className="status" />
     </form>
   );
-}
