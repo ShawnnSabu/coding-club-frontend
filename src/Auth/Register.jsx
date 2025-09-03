@@ -1,49 +1,48 @@
-export default function Login() {
+export default function Register() {
   return (
-    <div className="min-h-screen overflow-x-hidden bg-[#0b0b0c] text-[#f5f5f5]">
-      <div className="relative mx-auto max-w-[1180px] px-6 pt-14 pb-28">
-        {/* Decorative rails */}
-        <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-          <span className="absolute left-[72px] top-10 bottom-10 w-[2px] rounded bg-gradient-to-b from-transparent via-white/10 to-transparent" />
-          <span className="absolute right-[72px] top-10 bottom-10 w-[2px] rounded bg-gradient-to-b from-transparent via-white/10 to-transparent" />
+    <div className="text-gray-100 bg-[#0b0b0c] min-h-screen w-full overflow-x-hidden">
+      <div className="max-w-[1180px] mx-auto px-6 pt-14 pb-28 relative">
+        {/* rails */}
+        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+          <span className="absolute top-10 bottom-10 left-[72px] w-[2px] rounded bg-gradient-to-b from-transparent via-white/10 to-transparent" />
+          <span className="absolute top-10 bottom-10 right-[72px] w-[2px] rounded bg-gradient-to-b from-transparent via-white/10 to-transparent" />
         </div>
 
-        {/* Branding */}
-        <div className="mb-3 flex items-center gap-2 font-bold">
-          <span className="rounded-lg border-2 border-white px-[14px] py-2 text-lg">
+        {/* header */}
+        <div className="flex items-center gap-2 mb-3 font-bold tracking-wide text-white">
+          <span className="px-4 py-2 border-2 border-white rounded-lg text-lg">
             &lt;Coding Club&gt;
           </span>
-          <span className="ml-2 text-sm font-semibold opacity-85">TKMCE</span>
+          <span className="ml-2 font-semibold text-sm opacity-85">TKMCE</span>
         </div>
 
-        {/* Title */}
-        <h1 className="my-2 mb-8 text-[clamp(44px,6vw,84px)] font-extrabold tracking-tight">
-          <span className="text-[#ff2b2b]">&lt;</span>Login
-          <span className="text-[#ff2b2b]">&gt;</span>
+        <h1 className="text-[clamp(44px,6vw,84px)] font-extrabold tracking-tight my-2 mb-8">
+          <span className="text-red-500">&lt;</span>Registration
+          <span className="text-red-500">&gt;</span>
         </h1>
 
-        {/* Card */}
-        <section className="relative rounded-[28px] border border-white/20 bg-gradient-to-b from-[#141419] to-[#1a1b22] p-10 shadow-xl">
-          <div className="grid gap-[clamp(22px,3.5vw,40px)] md:grid-cols-[1.1fr,1fr]">
-            {/* Left pitch */}
+        {/* card */}
+        <section className="relative rounded-[28px] border border-white/20 bg-gradient-to-b from-[#141419] to-[#1a1b22] shadow-[0_10px_30px_rgba(0,0,0,.35),inset_0_0_0_1px_rgba(255,255,255,.06)] p-[38px]">
+          <div className="grid gap-[clamp(22px,3.5vw,40px)] grid-cols-1 md:grid-cols-[1.1fr_1fr]">
+            {/* left copy */}
             <div>
-              <h2 className="mb-3 text-[clamp(28px,3.2vw,44px)] font-extrabold">
-                WELCOME BACK
+              <h2 className="my-1 text-[clamp(28px,3.2vw,44px)] font-extrabold">
+                JOIN US
               </h2>
-              <p className="text-[#bdbdbf] leading-relaxed">
-                Sign in to continue collaborating with passionate coders and creators
+              <p className="text-gray-400 leading-relaxed">
+                Collaborate &amp; connect with passionate coders and creators like you
               </p>
               <button
                 type="button"
-                onClick={() => alert("About Coding Club TKMCE")}
-                className="mt-6 inline-block rounded-full bg-white px-6 py-2 font-bold text-black shadow-md transition hover:-translate-y-0.5"
+                onClick={() => alert('About Coding Club TKMCE')}
+                className="mt-6 inline-block px-6 py-3 text-black bg-white rounded-full font-bold shadow hover:-translate-y-[1px] transition"
               >
                 About us
               </button>
             </div>
 
-            {/* Right form */}
-            <LoginForm />
+            {/* form */}
+            <FormBlock />
           </div>
         </section>
       </div>
@@ -51,98 +50,61 @@ export default function Login() {
   );
 }
 
-function LoginForm() {
+function FormBlock() {
   function onSubmit(e) {
     e.preventDefault();
-    const f = new FormData(e.currentTarget);
-    const email = String(f.get("email") || "").trim();
-    const password = String(f.get("password") || "");
-    const status = e.currentTarget.querySelector(".status");
+    const data = new FormData(e.currentTarget);
+    const fields = ['name', 'year', 'branch', 'email'];
+    const missing = fields.filter((k) => !String(data.get(k) || '').trim());
 
-    if (!email || !password) {
-      status.textContent = "Please enter email and password.";
-      status.className = "status text-[#ff8b8b]";
+    const status = e.currentTarget.querySelector('.status');
+    if (missing.length) {
+      status.textContent = 'Please fill all fields.';
+      status.className = 'status text-red-400 mt-2 text-sm';
       return;
     }
+    const email = String(data.get('email') || '');
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      status.textContent = "Please enter a valid email.";
-      status.className = "status text-[#ff8b8b]";
+      status.textContent = 'Enter a valid email address.';
+      status.className = 'status text-red-400 mt-2 text-sm';
       return;
     }
-
-    setTimeout(() => {
-      status.textContent = "Signed in! (Demo — wire this to your backend)";
-      status.className = "status text-[#7ef29a]";
-      e.currentTarget.reset();
-    }, 450);
+    status.textContent = 'Registered! (Demo only — connect to your API)';
+    status.className = 'status text-green-400 mt-2 text-sm';
+    e.currentTarget.reset();
   }
 
   return (
     <form className="grid gap-4 content-start" onSubmit={onSubmit}>
-      {/* Email */}
-      <div className="grid grid-cols-[auto,1fr] items-center gap-4">
-        <label
-          htmlFor="email"
-          className="flex items-center gap-2 text-lg font-extrabold"
-        >
-          Email ID <span className="h-[3px] w-4 rounded bg-[#ff2b2b]" />
-        </label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          placeholder="abc@college.edu"
-          className="h-12 rounded-lg border border-white/10 bg-[#2a2c36] px-4 text-white placeholder-[#a4a6b3] focus:border-white/30 focus:bg-[#353746] focus:outline-none focus:ring-4 focus:ring-white/10"
-        />
-      </div>
+      {[
+        { id: 'name', label: 'Name', placeholder: 'Your name' },
+        { id: 'year', label: 'Year', placeholder: '1st / 2nd / 3rd / 4th' },
+        { id: 'branch', label: 'Branch', placeholder: 'CSE / ECE / ...' },
+        { id: 'email', label: 'Email ID', placeholder: 'abc@tkmce.ac.in', type: 'email' },
+      ].map((field) => (
+        <div key={field.id} className="grid grid-cols-[auto_1fr] items-center gap-3">
+          <label htmlFor={field.id} className="flex items-center gap-2 text-lg font-extrabold">
+            {field.label} <span className="w-3.5 h-[3px] bg-red-500 rounded" />
+          </label>
+          <input
+            id={field.id}
+            name={field.id}
+            type={field.type || 'text'}
+            placeholder={field.placeholder}
+            className="h-12 rounded-lg bg-[#2a2c36] border border-white/10 px-4 text-gray-100 placeholder-gray-400 focus:bg-[#353746] focus:border-white/30 focus:ring-4 focus:ring-white/10 outline-none transition"
+          />
+        </div>
+      ))}
 
-      {/* Password */}
-      <div className="grid grid-cols-[auto,1fr] items-center gap-4">
-        <label
-          htmlFor="password"
-          className="flex items-center gap-2 text-lg font-extrabold"
-        >
-          Password <span className="h-[3px] w-4 rounded bg-[#ff2b2b]" />
-        </label>
-        <input
-          id="password"
-          name="password"
-          type="password"
-          placeholder="Enter Your password"
-          className="h-12 rounded-lg border border-white/10 bg-[#2a2c36] px-4 text-white placeholder-[#a4a6b3] focus:border-white/30 focus:bg-[#353746] focus:outline-none focus:ring-4 focus:ring-white/10"
-        />
-      </div>
-
-      {/* Extras */}
-      <div className="mt-1 flex items-center justify-between text-sm text-[#bdbdbf]">
-        <label className="flex items-center gap-2">
-          <input type="checkbox" className="accent-[#cfcfcf]" /> Remember me
-        </label>
-        <a href="#" className="hover:underline">
-          Forgot password?
-        </a>
-      </div>
-
-      {/* Actions */}
-      <div className="flex justify-end pt-6">
+      <div className="flex justify-end mt-7">
         <button
           type="submit"
-          className="h-[54px] rounded-full bg-gradient-to-r from-[#7b5cff] to-[#ff7b6e] px-7 text-lg font-extrabold text-black shadow-lg transition hover:-translate-y-0.5 hover:brightness-105"
+          className="h-[54px] px-7 text-lg font-extrabold text-black rounded-full cursor-pointer bg-gradient-to-r from-[#7b5cff] to-[#ff7b6e] shadow-[0_10px_24px_rgba(127,88,255,.35),0_6px_18px_rgba(255,123,110,.25)] hover:-translate-y-[1px] hover:brightness-105 transition"
         >
-          Sign in
+          Register
         </button>
       </div>
-
-      {/* Register */}
-      <p className="mt-3 text-sm text-[#bdbdbf]">
-        Don’t have an account?{" "}
-        <a href="/register" className="font-bold text-white hover:underline">
-          Register
-        </a>
-      </p>
-
-      {/* Status */}
-      <p className="status mt-2 text-sm text-[#bdbdbf]" />
+      <p className="status mt-2 text-gray-400 text-sm" />
     </form>
   );
 }
