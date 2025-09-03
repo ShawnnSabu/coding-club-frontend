@@ -1,143 +1,49 @@
-export default function Register() {
+export default function Login() {
   return (
-    <div className="registration-root">
-      {/* quick-scoped styles for this component */}
-      <style>{`
-        :root{
-          --bg:#0b0b0c;
-          --panel:#141419;
-          --panel2:#1a1b22;
-          --text:#f5f5f5;
-          --muted:#bdbdbf;
-          --accent:#ff2b2b;
-          --input:#2a2c36;
-          --inputFocus:#353746;
-          --ring:rgba(255,255,255,.12);
-          --cardBorder:rgba(255,255,255,.18);
-          --gradA:#7b5cff;
-          --gradB:#ff7b6e;
-        }
-        .registration-root{
-          color:var(--text);
-          background:var(--bg);
-          min-height:100dvh;
-          width:100%;
-          overflow-x:hidden;
-        }
-        .container{
-          max-width:1180px;
-          margin:0 auto;
-          padding:56px 24px 110px;
-          position:relative;
-        }
-        .rails{ position:absolute; inset:0; pointer-events:none }
-        .rail{
-          position:absolute; top:40px; bottom:40px; width:2px;
-          background:linear-gradient(to bottom, transparent 0 6%, #ffffff22 6% 94%, transparent 94% 100%);
-          border-radius:2px;
-        }
-        .rail.left{ left:72px } .rail.right{ right:72px }
-
-        .brand{
-          display:flex; align-items:center; gap:10px;
-          color:#fff; font-weight:700; letter-spacing:.3px;
-          margin-bottom:12px;
-        }
-        .club{ padding:8px 14px; border:2px solid #fff; border-radius:10px; font-size:18px }
-        .campus{ margin-left:8px; font-weight:600; opacity:.85; font-size:14px }
-
-        .title{
-          font-size:clamp(44px,6vw,84px);
-          font-weight:800; letter-spacing:-1px; margin:10px 0 30px;
-        }
-        .angle{ color:var(--accent) }
-
-        .card{
-          position:relative;
-          border-radius:28px;
-          border:1.5px solid var(--cardBorder);
-          background:
-            radial-gradient(1200px 400px at 70% 0%, #ffffff08 0%, transparent 60%),
-            url("data:image/svg+xml;utf8,\
-<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'>\
-<defs><pattern id='topo' width='400' height='400' patternUnits='userSpaceOnUse'>\
-<path d='M0,120 C80,90 140,130 220,110 S360,70 400,90' fill='none' stroke='rgba(255,255,255,0.05)' stroke-width='1'/>\
-<path d='M0,200 C90,170 150,210 230,190 S360,150 400,170' fill='none' stroke='rgba(255,255,255,0.05)' stroke-width='1'/>\
-<path d='M0,280 C70,250 140,290 220,270 S360,230 400,250' fill='none' stroke='rgba(255,255,255,0.05)' stroke-width='1'/>\
-</pattern></defs><rect width='400' height='400' fill='url(%23topo)'/></svg>") repeat,
-            linear-gradient(180deg, var(--panel) 0%, var(--panel2) 100%);
-          padding:38px 34px;
-          box-shadow:0 10px 30px rgba(0,0,0,.35), inset 0 0 0 1px #ffffff10;
-        }
-        .grid{
-          display:grid; grid-template-columns:1.1fr 1fr; gap:clamp(22px,3.5vw,40px);
-        }
-        @media (max-width:880px){ .grid{ grid-template-columns:1fr } }
-
-        .pitch h2{ margin:4px 0 14px; font-size:clamp(28px,3.2vw,44px); font-weight:800 }
-        .pitch p{ margin:0; color:var(--muted); line-height:1.6 }
-        .aboutBtn{
-          margin-top:24px; display:inline-block; padding:12px 22px;
-          color:#111; background:#fff; border-radius:999px; font-weight:700; border:none; cursor:pointer;
-          transition:transform .12s ease, box-shadow .2s ease;
-          box-shadow:0 6px 16px rgba(255,255,255,.15);
-        }
-        .aboutBtn:hover{ transform:translateY(-1px) }
-
-        .form{ display:grid; gap:14px; align-content:start }
-        .field{ display:grid; grid-template-columns:auto 1fr; align-items:center; gap:14px }
-        .label{ display:flex; align-items:center; gap:10px; font-size:20px; font-weight:800 }
-        .dash{ width:14px; height:3px; background:var(--accent); border-radius:2px }
-        .input{
-          height:48px; border-radius:14px; background:var(--input);
-          border:1px solid #ffffff14; padding:0 16px; color:var(--text); outline:none;
-          transition:border-color .2s ease, background .2s ease, box-shadow .2s ease;
-        }
-        .input::placeholder{ color:#a4a6b3 }
-        .input:focus{ background:var(--inputFocus); border-color:#ffffff33; box-shadow:0 0 0 4px var(--ring) }
-
-        .actions{ display:flex; justify-content:flex-end; margin-top:28px }
-        .cta{
-          height:54px; padding:0 28px; border:none; border-radius:999px;
-          color:#111; font-weight:800; font-size:18px; cursor:pointer;
-          background:linear-gradient(90deg, var(--gradA), var(--gradB));
-          box-shadow:0 10px 24px rgba(127,88,255,.35), 0 6px 18px rgba(255,123,110,.25);
-          transition:transform .12s ease, filter .2s ease, box-shadow .2s ease;
-        }
-        .cta:hover{ transform:translateY(-1px); filter:brightness(1.05) }
-        .status{ margin-top:10px; font-size:.95rem; color:var(--muted) }
-        .status.ok{ color:#7ef29a } .status.err{ color:#ff8b8b }
-      `}</style>
-
-      <div className="container">
-        {/* rails */}
-        <div className="rails" aria-hidden="true">
-          <span className="rail left" />
-          <span className="rail right" />
+    <div className="min-h-screen overflow-x-hidden bg-[#0b0b0c] text-[#f5f5f5]">
+      <div className="relative mx-auto max-w-[1180px] px-6 pt-14 pb-28">
+        {/* Decorative rails */}
+        <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+          <span className="absolute left-[72px] top-10 bottom-10 w-[2px] rounded bg-gradient-to-b from-transparent via-white/10 to-transparent" />
+          <span className="absolute right-[72px] top-10 bottom-10 w-[2px] rounded bg-gradient-to-b from-transparent via-white/10 to-transparent" />
         </div>
 
-        {/* header */}
-        <div className="brand">
-          <span className="club">&lt;Coding Club&gt;</span>
-          <span className="campus">TKMCE</span>
+        {/* Branding */}
+        <div className="mb-3 flex items-center gap-2 font-bold">
+          <span className="rounded-lg border-2 border-white px-[14px] py-2 text-lg">
+            &lt;Coding Club&gt;
+          </span>
+          <span className="ml-2 text-sm font-semibold opacity-85">TKMCE</span>
         </div>
 
-        <h1 className="title"><span className="angle">&lt;</span>Registration<span className="angle">&gt;</span></h1>
+        {/* Title */}
+        <h1 className="my-2 mb-8 text-[clamp(44px,6vw,84px)] font-extrabold tracking-tight">
+          <span className="text-[#ff2b2b]">&lt;</span>Login
+          <span className="text-[#ff2b2b]">&gt;</span>
+        </h1>
 
-        {/* card */}
-        <section className="card">
-          <div className="grid">
-            {/* left copy */}
-            <div className="pitch">
-              <h2>JOIN US</h2>
-              <p>Collaborate &amp; connect with passionate coders and creators like you</p>
-              <button className="aboutBtn" type="button" onClick={() => alert('About Coding Club TKMCE')}>
+        {/* Card */}
+        <section className="relative rounded-[28px] border border-white/20 bg-gradient-to-b from-[#141419] to-[#1a1b22] p-10 shadow-xl">
+          <div className="grid gap-[clamp(22px,3.5vw,40px)] md:grid-cols-[1.1fr,1fr]">
+            {/* Left pitch */}
+            <div>
+              <h2 className="mb-3 text-[clamp(28px,3.2vw,44px)] font-extrabold">
+                WELCOME BACK
+              </h2>
+              <p className="text-[#bdbdbf] leading-relaxed">
+                Sign in to continue collaborating with passionate coders and creators
+              </p>
+              <button
+                type="button"
+                onClick={() => alert("About Coding Club TKMCE")}
+                className="mt-6 inline-block rounded-full bg-white px-6 py-2 font-bold text-black shadow-md transition hover:-translate-y-0.5"
+              >
                 About us
               </button>
             </div>
 
-            {/* form */}
-            <FormBlock />
+            {/* Right form */}
+            <LoginForm />
           </div>
         </section>
       </div>
@@ -145,56 +51,98 @@ export default function Register() {
   );
 }
 
-function FormBlock() {
+function LoginForm() {
   function onSubmit(e) {
     e.preventDefault();
-    const data = new FormData(e.currentTarget);
-    const fields = ['name','year','branch','email'];
-    const missing = fields.filter(k => !String(data.get(k) || '').trim());
+    const f = new FormData(e.currentTarget);
+    const email = String(f.get("email") || "").trim();
+    const password = String(f.get("password") || "");
+    const status = e.currentTarget.querySelector(".status");
 
-    const status = e.currentTarget.querySelector('.status');
-    if (missing.length) {
-      status.textContent = 'Please fill all fields.';
-      status.className = 'status err';
+    if (!email || !password) {
+      status.textContent = "Please enter email and password.";
+      status.className = "status text-[#ff8b8b]";
       return;
     }
-    const email = String(data.get('email') || '');
-    if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) {
-      status.textContent = 'Enter a valid email address.';
-      status.className = 'status err';
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      status.textContent = "Please enter a valid email.";
+      status.className = "status text-[#ff8b8b]";
       return;
     }
-    status.textContent = 'Registered! (Demo only — connect to your API)';
-    status.className = 'status ok';
-    e.currentTarget.reset();
+
+    setTimeout(() => {
+      status.textContent = "Signed in! (Demo — wire this to your backend)";
+      status.className = "status text-[#7ef29a]";
+      e.currentTarget.reset();
+    }, 450);
   }
 
   return (
-    <form className="form" onSubmit={onSubmit}>
-      <div className="field">
-        <label className="label" htmlFor="name">Name <span className="dash" /></label>
-        <input id="name" name="name" className="input" placeholder="Your name" />
+    <form className="grid gap-4 content-start" onSubmit={onSubmit}>
+      {/* Email */}
+      <div className="grid grid-cols-[auto,1fr] items-center gap-4">
+        <label
+          htmlFor="email"
+          className="flex items-center gap-2 text-lg font-extrabold"
+        >
+          Email ID <span className="h-[3px] w-4 rounded bg-[#ff2b2b]" />
+        </label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          placeholder="abc@college.edu"
+          className="h-12 rounded-lg border border-white/10 bg-[#2a2c36] px-4 text-white placeholder-[#a4a6b3] focus:border-white/30 focus:bg-[#353746] focus:outline-none focus:ring-4 focus:ring-white/10"
+        />
       </div>
 
-      <div className="field">
-        <label className="label" htmlFor="year">Year <span className="dash" /></label>
-        <input id="year" name="year" className="input" placeholder="1st / 2nd / 3rd / 4th" />
+      {/* Password */}
+      <div className="grid grid-cols-[auto,1fr] items-center gap-4">
+        <label
+          htmlFor="password"
+          className="flex items-center gap-2 text-lg font-extrabold"
+        >
+          Password <span className="h-[3px] w-4 rounded bg-[#ff2b2b]" />
+        </label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          placeholder="Enter Your password"
+          className="h-12 rounded-lg border border-white/10 bg-[#2a2c36] px-4 text-white placeholder-[#a4a6b3] focus:border-white/30 focus:bg-[#353746] focus:outline-none focus:ring-4 focus:ring-white/10"
+        />
       </div>
 
-      <div className="field">
-        <label className="label" htmlFor="branch">Branch <span className="dash" /></label>
-        <input id="branch" name="branch" className="input" placeholder="CSE / ECE / ..." />
+      {/* Extras */}
+      <div className="mt-1 flex items-center justify-between text-sm text-[#bdbdbf]">
+        <label className="flex items-center gap-2">
+          <input type="checkbox" className="accent-[#cfcfcf]" /> Remember me
+        </label>
+        <a href="#" className="hover:underline">
+          Forgot password?
+        </a>
       </div>
 
-      <div className="field">
-        <label className="label" htmlFor="email">Email ID <span className="dash" /></label>
-        <input id="email" name="email" className="input" type="email" placeholder="abc@tkmce.ac.in" />
+      {/* Actions */}
+      <div className="flex justify-end pt-6">
+        <button
+          type="submit"
+          className="h-[54px] rounded-full bg-gradient-to-r from-[#7b5cff] to-[#ff7b6e] px-7 text-lg font-extrabold text-black shadow-lg transition hover:-translate-y-0.5 hover:brightness-105"
+        >
+          Sign in
+        </button>
       </div>
 
-      <div className="actions">
-        <button className="cta" type="submit">Register</button>
-      </div>
-      <p className="status" />
+      {/* Register */}
+      <p className="mt-3 text-sm text-[#bdbdbf]">
+        Don’t have an account?{" "}
+        <a href="/register" className="font-bold text-white hover:underline">
+          Register
+        </a>
+      </p>
+
+      {/* Status */}
+      <p className="status mt-2 text-sm text-[#bdbdbf]" />
     </form>
   );
 }
