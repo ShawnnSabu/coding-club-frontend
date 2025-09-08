@@ -2,6 +2,7 @@ import "./App.css";
 import "primeicons/primeicons.css";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
+
 import { useState, useRef, useEffect } from "react";
 import {
   BrowserRouter,
@@ -21,7 +22,8 @@ import AdminDashboard from "./adminPages/AdminDashboard";
 import AdminEvents from "./adminPages/AdminEvents";
 import Loader from "./components/Loader/loader";
 import ProtectedAdminRoute from "./protectedRoutes/ProtectedAdminRoute";
-
+import Login from "./Auth/Login";
+import Register from "./Auth/Register";
 function App() {
   const [isLoading, setIsLoading] = useState(true);
 
@@ -54,7 +56,8 @@ function App() {
               <Route path="/contacts" element={<Contacts />} />
               <Route element={<RequireAuth />}></Route>
               <Route path="/admin-login" element={<AdminLogin />} />
-
+              <Route path="/Login" element={<Login/>}/>
+              <Route path="/Register" element={<Register/>}/>
               {/* Protected Admin Routes */}
               <Route element={<ProtectedAdminRoute />}>
                 <Route path="/admin-dashboard" element={<AdminDashboard />} />
