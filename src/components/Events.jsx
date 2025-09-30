@@ -26,9 +26,7 @@ const Events = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await axios.get(
-          `${API_ENDPOINTS.EVENT}`
-        );
+        const response = await axios.get(`${API_ENDPOINTS.EVENT}`);
         const currentDate = new Date();
         const upcomingEvents = response.data.filter(
           (event) => new Date(event.eventDate) > currentDate
@@ -43,9 +41,7 @@ const Events = () => {
 
     const fetchPastEvents = async () => {
       try {
-        const response = await axios.get(
-          `${API_ENDPOINTS.EVENT}`
-        );
+        const response = await axios.get(`${API_ENDPOINTS.EVENT}`);
         const currentDate = new Date();
         const pastEvents = response.data.filter(
           (event) => new Date(event.eventDate) < currentDate
@@ -130,9 +126,9 @@ const Events = () => {
                 key={event._id}
                 className="event-card  p-5 w-[90%] sm:w-80 border rounded-lg shadow-lg transition-transform duration-200 hover:scale-[1.01] bg-gradient-to-b from-gray-700 to-black text-white text-center"
               >
-                {event.eventImage && (
+                {event.eventImg && (
                   <img
-                    src={`data:image/png;base64,${event.eventImage}`}
+                    src={event.eventImg}
                     alt={event.eventName}
                     className="w-full h-60 object-cover rounded-t-lg mb-4"
                   />
@@ -191,9 +187,9 @@ const Events = () => {
                 key={event._id}
                 className="event-card p-5 w-[90%] sm:w-80 border rounded-lg shadow-lg transition-transform duration-200 hover:scale-[1.01] bg-gradient-to-b from-gray-700 to-black text-white text-center"
               >
-                {event.eventImage && (
+                {event.eventImg && (
                   <img
-                    src={`data:image/png;base64,${event.eventImage}`}
+                    src={event.eventImg}
                     alt={event.eventName}
                     className="w-full h-60 object-cover rounded-t-lg mb-4"
                   />
